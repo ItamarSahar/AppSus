@@ -1,0 +1,24 @@
+body {
+	background-color: var(--main-bg-color);
+	font-family: robo-lig, sans-serif;
+	text-align: center;
+	max-width: 100%;
+	overflow-x: hidden;
+	background-color: var(--main-bg);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: 30px;
+	font-family: robo-bold;
+	margin: 5px;
+}
+
+.fa-solid {
+	font-family: fo;
+}
+
