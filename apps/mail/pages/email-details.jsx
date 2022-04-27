@@ -19,21 +19,7 @@
 //   render() {
 //     const { mail } = this.state;
 //     if (!mail) return <div>Loading....</div>;
-//     return (
-//       <div className='mail-details flex-colunm'>
-//         <h1>{mail.subject}</h1>
-//         <div className='details-from-to'>
-//           <h2>{mail.from}</h2>
-//           <span>{mail.fromEmail}</span>
-//           <h5>To</h5>
-//         </div>
-//         <div className='details-body'>
-//           <p>{mail.body}</p>
-//         </div>
-//         <button className='primary-btn' onClick={this.onGoBack}>
-//           Go back
-//         </button>
-//       </div>
+//
 //     );
 //   }
 

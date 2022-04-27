@@ -1,0 +1,66 @@
+.mail-preview {
+    color: black;
+    display: flex;
+    gap: 15px;
+    text-align: left;
+}
+
+.subject-preview {
+    width: 100px;
+}
+
+.text-preview {
+    width: 370px;
+}
+
+.mail-preview td {
+    padding: 30px 10px;
+
+}
+
+.preview-options {
+    width: 400px;
+}
+
+.expand-preview {
+    height: 150px;
+}
+
+.expand-preview-cell {
+    white-space: normal;
+    position: relative;
+    overflow: visible;
+}
+
+.expand-preview-cell-content {
+    position: absolute;
+    top: 0;
+    height: 200px;
+    text-align: left;
+    width: 500px
+}
+
+.bold {
+    font-family: robo-bold;
+    font-weight: 1000;
+}
+
+
+.preview-options img {
+    margin: 0 4px;
+    opacity: 0.5;
+    transition: 0.7s ease-in-out all;
+}
+
+.preview-options img:hover {
+    margin: 0 4px;
+    opacity: 1.5;
+}
+
+.mail-preview:hover {
+    color: #ccc;
+}
+
+.star-preview img {
+    height: 20px;
+}

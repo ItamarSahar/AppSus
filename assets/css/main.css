@@ -12,6 +12,8 @@
 /* Views */
 
 @import './pages/book-details.css';
+@import "./pages/email-app.css";
+
 
 /* Cmps */
 
@@ -25,4 +27,5 @@
 @import './cmps/note-list.css';
 @import './cmps/mail-header.css';
 @import './cmps/mail-list.css';
-@import "./pages/email-app.css"
+@import "./cmps/mail-folderlist.css";
+@import "./cmps/mail-preview.css"
