@@ -1,13 +1,14 @@
-import { utilService } from "../../../services/util.service";
-import { storageService } from "../../../services/storage.service";
+import { utilService } from "../../../services/util.service.js";
+import { storageService } from "../../../services/storage.service.js";
 
-export const emailService = {
+export const mailService = {
   createEmail: createEmail,
   query,
   getEmailById,
   removeEmail,
   _add,
-  sendNewMail,
+  saveMails,
+  loadMails,
 };
 
 const KEY = "emailDB";
@@ -17,15 +18,41 @@ const loggedinUser = {
   fullname: "Mahatma Appsus",
 };
 
-const email = {
-  id: "e101",
-  subject: "Miss you!",
-  body: "Would love to catch up sometimes",
-  isRead: false,
-  sentAt: 1551133930594,
-  to: "momo@momo.com",
-  removeAt,
-};
+const gEmails = [
+  {
+    id: "e101",
+    subject: "Miss you!",
+    body: "Would love to catch up sometimes",
+    isRead: false,
+    sentAt: 1551133930594,
+    isStarred: false,
+    isOpen: false,
+    to: "momo@momo.com",
+    isTrash: false,
+  },
+  {
+    id: "e101",
+    subject: "Miss you!",
+    body: "Would love to catch up sometimes",
+    isRead: false,
+    sentAt: 1551133930594,
+    isStarred: false,
+    isOpen: false,
+    to: "momo@momo.com",
+    isTrash: false,
+  },
+  {
+    id: "e101",
+    subject: "Miss you!",
+    body: "Would love to catch up sometimes",
+    isRead: false,
+    sentAt: 1551133930594,
+    isStarred: false,
+    isOpen: false,
+    to: "momo@momo.com",
+    isTrash: false,
+  },
+];
 
 const criteria = {
   status: "inbox/sent/trash/draft",
@@ -34,19 +61,29 @@ const criteria = {
   isStared: true, // (optional property, if missing: show all)
   lables: ["important", "romantic"], // has any of the labels
 };
+_saveToStorage(gEmails);
 
-function createEmail(subject, body, to, isRead = false, removeAt = null) {
-  return (email = {
+function createEmail(subject, body, to, isRead = false, isStarred) {
+  return {
     id: utilService.makeId(),
     subject,
     body,
     isRead,
     sentAt: new Date(),
     to,
-    removeAt,
-  });
+    isStarred: false,
+    isOpen: false,
+    isTrash: false,
+  };
 }
-
+function query(filterBy) {
+  let emails = _loadFromStorage();
+  if (!emails) {
+    emails = createEmail();
+    _saveToStorage(emails);
+  }
+  return Promise.resolve(emails);
+}
 function getEmailById(emailId) {
   const emails = _loadFromStorage();
   const email = emails.find((email) => emailId === email.id);
@@ -55,7 +92,7 @@ function getEmailById(emailId) {
 
 function removeEmail(emailId) {
   let emails = _loadFromStorage();
-  emails = email.filter((email) => email.id !== emailId);
+  emails = emails.filter((email) => email.id !== emailId);
   _saveToStorage(emails);
   return Promise.resolve();
 }
@@ -73,22 +110,6 @@ function _add(subject, body, to, isRead, removeAt) {
   _saveToStorage(emails);
   return Promise.resolve();
 }
-// function _createEmails() {
-//     const cars = []
-//     for (let i = 0; i < 20; i++) {
-//         const vendor = gVendors[utilService.getRandomIntInclusive(0, gVendors.length - 1)]
-//         cars.push(_createCar(vendor))
-//     }
-//     return cars
-// }
-
-function query(filterBy) {
-  let emails = _loadFromStorage();
-  if (!emails) {
-    emails = createEmail();
-    _saveToStorage(emails);
-  }
-}
 
 function _saveToStorage(emails) {
   storageService.saveToStorage(KEY, emails);
@@ -97,26 +118,10 @@ function _saveToStorage(emails) {
 function _loadFromStorage() {
   return storageService.loadFromStorage(KEY);
 }
+function saveMails(mails) {
+  _saveToStorage(mails);
+}
 
-function sendNewMail(newMail) {
-  console.log(newMail);
-  let mail = {
-    id: utilService.makeId(),
-    subject: newMail.subject,
-    body: newMail.text,
-    isRead: false,
-    sentAt: Date.now(),
-    star: false,
-    labels: newMail.labels,
-    fromEmail: loggedinUser.email,
-    to: newMail.to,
-    from: loggedinUser.fullname,
-    isOpen: false,
-    isTrash: false,
-  };
-
-  let mails = query(null).then((queryMails) => {
-    queryMails.unshift(mail);
-    saveMails(queryMails);
-  });
+function loadMails() {
+  return _loadFromStorage();
 }
