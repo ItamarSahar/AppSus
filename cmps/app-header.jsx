@@ -20,7 +20,7 @@ class _appHeader extends React.Component {
 		let { menu, button } = this.state.display
 		return (
 			<header className="app-header">
-				<h3 className="logo">The amazing Book Shop</h3>
+				<h3 className="logo">Appsus</h3>
 				<i
 					onClick={this.openMenu}
 					className={`menu fa-solid fa-bars ${button}`}
