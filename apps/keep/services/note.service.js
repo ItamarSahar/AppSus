@@ -1,5 +1,6 @@
-import { utilService } from '../../../services/util.service'
-import { storageService } from '../../../services/storage.service'
+import { utilService } from '../../../services/util.service.js'
+import { storageService } from '../../../services/storage.service.js'
+
 const KEY = 'notesDB'
 
 export const noteService = {
@@ -10,7 +11,7 @@ export const noteService = {
 	query,
 }
 
-const notes = [
+const gNotes = [
 	{
 		id: utilService.makeId(),
 		type: 'txt',
@@ -21,7 +22,10 @@ const notes = [
 	{
 		id: utilService.makeId(),
 		type: 'img',
-		info: { url: 'http://some-img/me', title: 'Bobi and Me' },
+		info: {
+			url: '../../../assets/img/parrots_paradise.jpg',
+			title: 'Bobi and Me',
+		},
 		style: { backgroundColor: '#00d' },
 		bgColor: utilService.getRandomColor(),
 	},
@@ -40,13 +44,24 @@ const notes = [
 	{
 		id: utilService.makeId(),
 		type: 'video',
+		label: 'Get my stuff together',
 		info: {
-			label: 'Get my stuff together',
-			info: { url: 'http://some-img/me', title: 'Bobi and Me' },
+			url: 'https://www.youtube.com/watch?v=l_Zb2W18MHc&ab_channel=MontyKamal',
+			title: 'Itachi',
 		},
 		bgColor: utilService.getRandomColor(),
 	},
 ]
+
+function query() {
+	let notes = _loadFromStorage()
+	if (!notes) {
+		notes = gNotes
+		_saveToStorage(notes)
+	}
+
+	return Promise.resolve(notes)
+}
 
 function createTxtNote(txt) {
 	return {
@@ -81,14 +96,6 @@ function createVideoNote(label, url, title) {
 			label,
 			info: { url, title },
 		},
-	}
-}
-
-function query(filterBy) {
-	let notes = _loadFromStorage()
-	if (!notes) {
-		notes = createEmail()
-		_saveToStorage(notes)
 	}
 }
 

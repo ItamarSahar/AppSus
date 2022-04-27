@@ -1,5 +1,13 @@
+export class NoteFilter extends React.Component {
+	state = {}
 
-
-export function note() {
-    return <section><h1>hey!</h1></section>
+	render() {
+		return (
+			<section>
+				<label>
+					<input type="text" placeholder="Type Text" />
+				</label>
+			</section>
+		)
+	}
 }
