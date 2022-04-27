@@ -13,7 +13,6 @@ export function App() {
 		<Router>
 			<section className="app">
 				<AppHeader />
-				<h1>AppSus</h1>
 				<main>
 					<Switch>
 						<Route path="/email" component={EmailApp} />
