@@ -9,54 +9,16 @@ export const noteService = {
 	createTxtNote,
 	createVideoNote,
 	query,
+	deleteTodo,
+	getNoteById,
+	updateNotes,
+	getNoteById
 }
-
-const gNotes = [
-	{
-		id: utilService.makeId(),
-		type: 'txt',
-		isPinned: true,
-		info: { txt: 'Fullstack Me Baby!' },
-		bgColor: utilService.getRandomColor(),
-	},
-	{
-		id: utilService.makeId(),
-		type: 'img',
-		info: {
-			url: '../../../assets/img/parrots_paradise.jpg',
-			title: 'Bobi and Me',
-		},
-		style: { backgroundColor: '#00d' },
-		bgColor: utilService.getRandomColor(),
-	},
-	{
-		id: utilService.makeId(),
-		type: 'todos',
-		info: {
-			label: 'Get my stuff together',
-			todos: [
-				{ txt: 'Driving liscence', doneAt: null },
-				{ txt: 'Coding power', doneAt: 187111111 },
-			],
-		},
-		bgColor: utilService.getRandomColor(),
-	},
-	{
-		id: utilService.makeId(),
-		type: 'video',
-		label: 'Get my stuff together',
-		info: {
-			url: 'https://www.youtube.com/watch?v=l_Zb2W18MHc&ab_channel=MontyKamal',
-			title: 'Itachi',
-		},
-		bgColor: utilService.getRandomColor(),
-	},
-]
 
 function query() {
 	let notes = _loadFromStorage()
-	if (!notes) {
-		notes = gNotes
+	if (!notes || !notes.length) {
+		notes = _getNotes()
 		_saveToStorage(notes)
 	}
 
@@ -107,18 +69,78 @@ function _add(noteToAdd, cb) {
 	return Promise.resolve()
 }
 
-function getNoteById(noteId) {
-	const notes = _loadFromStorage()
-	const note = notes.find((note) => noteId === note.id)
-	return Promise.resolve(note)
+
+
+function deleteTodo(idx, note) {
+	let { todos } = note.info
+	let notes = _loadFromStorage()
+	todos = todos.splice(idx, 1)
+	const noteIdx = getNoteById(note.id)
+	notes.splice(noteIdx, 1, note)
+	_saveToStorage(notes)
+	return
 }
 
-function removeEmail(noteId) {
+function getNoteById(noteId) {
+	console.log(noteId)
 	let notes = _loadFromStorage()
-	notes = note.filter((note) => note.id !== noteId)
-	_saveToStorage(notes)
-	return Promise.resolve()
+	return notes.findIndex((note) => noteId === note.id)
 }
+
+function updateNotes(notes) {
+	_saveToStorage(notes)
+}
+
+function _getNotes() {
+	return [
+		{
+			id: utilService.makeId(),
+			type: 'txt',
+			isPinned: true,
+			info: { txt: 'Fullstack Me Baby!' },
+			bgColor: utilService.getRandomColor(),
+		},
+		{
+			id: utilService.makeId(),
+			type: 'img',
+			info: {
+				url: '../../../assets/img/parrots_paradise.jpg',
+				title: 'Bobi and Me',
+			},
+			style: { backgroundColor: '#00d' },
+			bgColor: utilService.getRandomColor(),
+		},
+		{
+			id: utilService.makeId(),
+			type: 'todos',
+			info: {
+				label: 'Get my stuff together',
+				todos: [
+					{ txt: 'Driving liscence', doneAt: null },
+					{ txt: 'Coding power', doneAt: 187111111 },
+				],
+			},
+			bgColor: utilService.getRandomColor(),
+		},
+		{
+			id: utilService.makeId(),
+			type: 'video',
+			label: 'Get my stuff together',
+			info: {
+				url: 'https://www.youtube.com/watch?v=l_Zb2W18MHc&ab_channel=MontyKamal',
+				title: 'Itachi',
+			},
+			bgColor: utilService.getRandomColor(),
+		},
+	]
+}
+
+// function remove(carId) {
+// 	let cars = _loadFromStorage()
+// 	cars = cars.filter((car) => car.id !== carId)
+// 	_saveToStorage(cars)
+// 	return Promise.resolve()
+// }
 
 function _saveToStorage(notes) {
 	storageService.saveToStorage(KEY, notes)

@@ -1,7 +1,7 @@
-import { noteTxt } from '../cmps/note-txt.jsx'
-import { noteTodos } from '../cmps/note-todos.jsx'
-import { noteImg } from '../cmps/note-img.jsx'
-import { noteVideo } from '../cmps/note-video.jsx'
+import { NoteTxt } from '../cmps/note-txt.jsx'
+import { NoteTodos } from '../cmps/note-todos.jsx'
+import { NoteImg } from '../cmps/note-img.jsx'
+import { NoteVideo } from '../cmps/note-video.jsx'
 
 const { Link } = ReactRouterDOM
 
@@ -10,18 +10,19 @@ export class NotePreview extends React.Component {
 		type: '',
 	}
 	components = {
-		txt: noteTxt,
-		img: noteImg,
-		todos: noteTodos,
-		video: noteVideo,
+		txt: NoteTxt,
+		img: NoteImg,
+		todos: NoteTodos,
+		video: NoteVideo,
 	}
 
 	render() {
 		const { note } = this.props
+		const {onRemoveNote} = this.props
 		const SpecificNote = this.components[note.type]
 		return (
 			<section className="note-preview">
-				<SpecificNote  note={note}/>
+				<SpecificNote  note={note} onRemoveNote={onRemoveNote}/>
 			</section>
 		)
 	}
