@@ -23,3 +23,6 @@
 @import './cmps/email-button.css';
 @import './cmps/note-preview.css';
 @import './cmps/note-list.css';
+@import './cmps/mail-header.css';
+@import './cmps/mail-list.css';
+@import "./pages/email-app.css"
