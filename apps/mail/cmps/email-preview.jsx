@@ -32,13 +32,13 @@ export function MailPreview({
       <td className='preview-options'>
         {mail.isRead ? (
           <img
-            src='assets/SVG/markAsUnread.svg'
+            src='assets/SVG/markAsRead.svg'
             onClick={toggleRead}
             height='22px'
           />
         ) : (
           <img
-            src='assets/SVG/markAsRead.svg'
+            src='assets/SVG/markAsUnRead.svg'
             onClick={toggleRead}
             height='22px'
           />
