@@ -28,7 +28,7 @@ class _appHeader extends React.Component {
 
 				<nav className={`nav-header  ${menu}`} onClick={this.openMenu}>
 					<h3>MENU</h3>
-					<h3> HELLO</h3>
+					
 					<NavLink exact to="/">
 						Home
 					</NavLink>
