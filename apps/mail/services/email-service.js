@@ -29,6 +29,7 @@ const gEmails = [
     isOpen: false,
     to: "momo@momo.com",
     isTrash: false,
+    from: "user@appsus.com",
   },
   {
     id: "e102",
@@ -40,6 +41,7 @@ const gEmails = [
     isOpen: false,
     to: "momo@momo.com",
     isTrash: false,
+    from: "user@appsus.com",
   },
   {
     id: "e103",
@@ -51,6 +53,7 @@ const gEmails = [
     isOpen: false,
     to: "momo@momo.com",
     isTrash: false,
+    from: "user@appsus.com",
   },
   {
     id: "e104",
@@ -62,6 +65,7 @@ const gEmails = [
     isOpen: false,
     to: "momo@momo.com",
     isTrash: false,
+    from: "user@appsus.com",
   },
   {
     id: "e105",
@@ -73,6 +77,7 @@ const gEmails = [
     isOpen: false,
     to: "muki@bendavid.com",
     isTrash: false,
+    from: "user@appsus.com",
   },
 ];
 
@@ -98,14 +103,49 @@ function createEmail(subject, body, to, isRead = false, isStarred) {
     isTrash: false,
   };
 }
-function query(filterBy) {
+function query(filterBy, folderFilter = 0) {
   let emails = _loadFromStorage();
   if (!emails) {
     emails = createEmail();
     _saveToStorage(emails);
   }
-  return Promise.resolve(emails);
+  const FilteredMails = _getFilteredMails(emails, filterBy);
+
+  if (folderFilter === 0 && !filterBy) {
+    let notTrash = FilteredMails.filter((mail) => mail.isTrash === false);
+    return Promise.resolve(notTrash);
+  }
+  if (folderFilter === 1) {
+    let read = FilteredMails.filter(
+      (mail) => mail.isRead === true && mail.isTrash === false
+    );
+    return Promise.resolve(read);
+  }
+  if (folderFilter === 2) {
+    let unread = FilteredMails.filter(
+      (mail) => mail.isRead === false && mail.isTrash === false
+    );
+    return Promise.resolve(unread);
+  }
+  if (folderFilter === 3) {
+    let isStar = FilteredMails.filter(
+      (mail) => mail.star === true && mail.isTrash === false
+    );
+    return Promise.resolve(isStar);
+  }
+  if (folderFilter === 4) {
+    let showTrash = FilteredMails.filter((mail) => mail.isTrash === true);
+    return Promise.resolve(showTrash);
+  }
+  if (folderFilter === 5) {
+    let sent = FilteredMails.filter(
+      (mail) => mail.from === "user@appsus.com" && mail.isTrash === false
+    );
+    return Promise.resolve(sent);
+  }
+  return Promise.resolve(FilteredMails);
 }
+
 function getEmailById(emailId) {
   const emails = _loadFromStorage();
   const email = emails.find((email) => emailId === email.id);
@@ -146,4 +186,11 @@ function saveMails(mails) {
 
 function loadMails() {
   return _loadFromStorage();
+}
+function _getFilteredMails(mails, filterBy) {
+  let mailSearch = "";
+  if (filterBy) mailSearch = filterBy.mailSearch;
+  if (mailSearch === "") {
+    return mails;
+  }
 }

@@ -3,5 +3,6 @@
     display: flex;
     white-space: nowrap;
     justify-content: center;
-
+    margin-top: 40px;
+    margin-left: 40px;
 }
