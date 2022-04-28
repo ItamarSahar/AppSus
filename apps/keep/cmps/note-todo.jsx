@@ -1,5 +1,3 @@
-
-
 export function NoteTodo({ todo, idx, onDeleteTodo }) {
 	return (
 		<li>

@@ -1,4 +1,5 @@
 import { NotePreview } from './note-preview.jsx'
+const { Link } = ReactRouterDOM
 
 export function NoteList(props) {
 	const {notes} = props
