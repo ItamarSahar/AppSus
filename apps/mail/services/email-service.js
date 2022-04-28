@@ -70,7 +70,7 @@ const gEmails = [
   {
     id: "e105",
     subject: "Not a scam?",
-    body: "This is not a scam",
+    body: "This is not a scamSpecific pricing and discounts may be subject to change. Please check the Steam store page for details You are receiving this email because the above item is on your Steam Wishlist",
     isRead: false,
     sentAt: 1551133930594,
     isStarred: false,
@@ -92,8 +92,7 @@ _saveToStorage(gEmails);
 
 function createEmail(subject, body, to) {
   let emails = _loadFromStorage();
-  let email;
-  email = {
+  const email = {
     id: utilService.makeId(),
     subject,
     body,
@@ -106,7 +105,7 @@ function createEmail(subject, body, to) {
   };
   emails.push(email);
   _saveToStorage(emails);
-
+  console.log(email);
   return Promise.resolve();
 }
 

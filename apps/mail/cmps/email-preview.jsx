@@ -8,6 +8,7 @@ export function MailPreview({
   toggleRead,
 }) {
   let date = new Date(mail.sentAt);
+  console.log(mail)
   return !mail.isOpen ? (
     <tr className={mail.isRead ? 'mail-preview' : 'mail-preview bold '}>
       <td className='star-preview' onClick={toggleStar}>
@@ -19,12 +20,12 @@ export function MailPreview({
       </td>
 
       <td className='subject-preview' onClick={togglePreview}>
-        {mail.subject.length > 15
-          ? mail.subject.slice(0, 15) + `...`
+        {mail.subject.length > 20
+          ? mail.subject.slice(0, 20) + `...`
           : mail.subject}
       </td>
       <td className='text-preview' onClick={togglePreview}>
-        {mail.body.length > 50 ? mail.body.slice(0, 50) + `...` : mail.body}
+        {mail.body.length > 100 ? mail.body.slice(0, 100) + `...` : mail.body}
       </td>
       <td onClick={togglePreview}>
         {date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()}

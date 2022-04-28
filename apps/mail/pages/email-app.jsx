@@ -24,6 +24,7 @@ export class MailApp extends React.Component {
       .then(() => this.loadMails());
   }
 
+ 
   loadMails = () => {
     const { filterBy,folderFilter } = this.state;
     mailService.query(filterBy,folderFilter).then((mails) => {
@@ -91,8 +92,9 @@ export class MailApp extends React.Component {
     let percent = (unreadCount / mails.length) * 100;
     return percent
   }
-  ComposeMail = () => {
-    this.setState({ isNewMail: false }, this.loadMails);
+  RefreshMails = () => {
+   const mails =  mailService.loadMails()
+   this.setState({mails})
   };
   render() {
     const { mails, filterBy, isNewMail} = this.state;
@@ -119,7 +121,7 @@ export class MailApp extends React.Component {
             mails={mails}
           />
 
-            <ComposeMail ComposeMail={this.ComposeMail} />
+            <ComposeMail RefreshMails={this.RefreshMails} />
        
 <footer className ="app-footer"></footer>
         </div>
