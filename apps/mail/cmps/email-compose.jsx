@@ -4,40 +4,50 @@ import { mailService } from '../services/email-service.js';
 
 export class ComposeMail extends React.Component {
     state = {
-      to: '',
+        mail:{
       subject: '',
-      text: '',
+      body: '',    
+      to: '',
+    },
+    display:{
+        compose: 'none',
+        button: 'flex',    
+      }
+
          };
   
-    handleChange = ({ target }) => {
-      const field = target.name;
-      const value = target.value;
-      this.setState((prevState) => ({ ...prevState, [field]: value }));
-    };
-    onCompose = (ev) => {
+         handleChange = ({ target }) => {
+            const field = target.name;
+            const value = target.value;
+            this.setState((prevState) => ({
+              mail: { ...prevState.mail, [field]: value },
+            }));
+          };
+                
+            onCompose = (ev) => {
+                const {to, subject, body } = this.state.mail;
+
         ev.preventDefault();
-      var email =  mailService.createEmail(this.state);
-      console.log(`email = `, email)
-      mailService.pushMail(email)
-        this.setState({ to: '', subject: '', text: '' });
-      };
-  
-  onComposeClick = () => {
-         let {display} = this.state
-         display = (display = '') ? 'none' : 'none'
-       this.setState({display : display}) 
-  }
+      mailService.createEmail((subject,body,to)).then(this.setState(({mail: {subject: '',body: '',to: '' }})))}
+
+            openCompose = () => {
+                let { button,compose } = this.state.display
+                   compose = 'none' ? 'block' : 'none'
+                   button = 'flex' ?  'none' : 'flex'
+                   this.setState({display:{compose,button}})
+            }
+     
       render(){
           
-        const {display, to, subject, text } = this.state;
+        const {to, subject, body } = this.state.mail;
+        const {button,compose} = this.state.display;
+
       return(
           <div>
-
-        <div className={`compose-mail ${display}`}>
+                    <button onClick = {this.openCompose} className ={`compose-button button-17 ${button}`}>Send an Email</button>
+        <div className={`compose-mail  ${compose}`}>
         <div className='new-header'>
           <span >Compose an email</span>
-          <span className='close' onClick={this.props.closeComposeMail}>
-          </span>
         </div>
         <form onSubmit={this.onCompose}>
           <div className='to'>
@@ -56,9 +66,9 @@ export class ComposeMail extends React.Component {
               onChange={this.handleChange}
             />
             <textarea
-              value={text}
+              value={body}
               onChange={this.handleChange}
-              name='text'
+              name='body'
               className='textArea'
             ></textarea>
                         </div>

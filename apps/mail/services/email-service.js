@@ -2,7 +2,7 @@ import { utilService } from "../../../services/util.service.js";
 import { storageService } from "../../../services/storage.service.js";
 
 export const mailService = {
-  createEmail: createEmail,
+  createEmail,
   query,
   getEmailById,
   removeEmail,
@@ -91,7 +91,9 @@ const criteria = {
 _saveToStorage(gEmails);
 
 function createEmail(subject, body, to) {
-  return {
+  let emails = _loadFromStorage();
+  let email;
+  email = {
     id: utilService.makeId(),
     subject,
     body,
@@ -102,6 +104,10 @@ function createEmail(subject, body, to) {
     isOpen: false,
     isTrash: false,
   };
+  emails.push(email);
+  _saveToStorage(emails);
+
+  return Promise.resolve();
 }
 
 function getEmailById(emailId) {

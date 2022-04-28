@@ -18,7 +18,6 @@ export class MailApp extends React.Component {
     this.loadMails()
       .then(() => {
         let { mails } = this.state;
-        console.log('mounting');
         mails.map((mail) => (mail.isOpen = false));
         mailService.saveMails(mails);
       })
@@ -92,17 +91,17 @@ export class MailApp extends React.Component {
     let percent = (unreadCount / mails.length) * 100;
     return percent
   }
-  closeComposeMail = () => {
+  ComposeMail = () => {
     this.setState({ isNewMail: false }, this.loadMails);
   };
   render() {
-    const { mails, filterBy} = this.state;
+    const { mails, filterBy, isNewMail} = this.state;
     return (
       <div className='mail-app'>
         <div className='header-mail'>
         </div>
         <div className='body-mail flex'>
-        <header className ="mail-header">        <MailHeader onSetFilter={this.onSetFilter}
+        <header className ="mail-header">   <MailHeader onSetFilter={this.onSetFilter}
 />
 </header>
           <MailFolderList
@@ -119,8 +118,9 @@ export class MailApp extends React.Component {
             loadMails={this.loadMails}
             mails={mails}
           />
-                  <ComposeMail closeComposeMail={this.closeComposeMail} />
 
+            <ComposeMail ComposeMail={this.ComposeMail} />
+       
 <footer className ="app-footer"></footer>
         </div>
       </div>
