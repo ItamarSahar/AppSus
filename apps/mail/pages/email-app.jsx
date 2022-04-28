@@ -102,7 +102,7 @@ export class MailApp extends React.Component {
         <div className='header-mail'>
         </div>
         <div className='body-mail flex'>
-        <header className ="mail-header">        <MailHeader             onSetFilter={this.onSetFilter}
+        <header className ="mail-header">        <MailHeader onSetFilter={this.onSetFilter}
 />
 </header>
           <MailFolderList

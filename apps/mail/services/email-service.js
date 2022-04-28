@@ -6,7 +6,7 @@ export const mailService = {
   query,
   getEmailById,
   removeEmail,
-  _add,
+  pushMail,
   saveMails,
   loadMails,
 };
@@ -90,60 +90,18 @@ const criteria = {
 };
 _saveToStorage(gEmails);
 
-function createEmail(subject, body, to, isRead = false, isStarred) {
+function createEmail(subject, body, to) {
   return {
     id: utilService.makeId(),
     subject,
     body,
-    isRead,
+    isRead: false,
     sentAt: new Date(),
     to,
     isStarred: false,
     isOpen: false,
     isTrash: false,
   };
-}
-function query(filterBy, folderFilter = 0) {
-  let emails = _loadFromStorage();
-  if (!emails) {
-    emails = createEmail();
-    _saveToStorage(emails);
-  }
-  const FilteredMails = _getFilteredMails(emails, filterBy);
-
-  if (folderFilter === 0 && !filterBy) {
-    let notTrash = FilteredMails.filter((mail) => mail.isTrash === false);
-    return Promise.resolve(notTrash);
-  }
-  if (folderFilter === 1) {
-    let read = FilteredMails.filter(
-      (mail) => mail.isRead === true && mail.isTrash === false
-    );
-    return Promise.resolve(read);
-  }
-  if (folderFilter === 2) {
-    let unread = FilteredMails.filter(
-      (mail) => mail.isRead === false && mail.isTrash === false
-    );
-    return Promise.resolve(unread);
-  }
-  if (folderFilter === 3) {
-    let isStar = FilteredMails.filter(
-      (mail) => mail.star === true && mail.isTrash === false
-    );
-    return Promise.resolve(isStar);
-  }
-  if (folderFilter === 4) {
-    let showTrash = FilteredMails.filter((mail) => mail.isTrash === true);
-    return Promise.resolve(showTrash);
-  }
-  if (folderFilter === 5) {
-    let sent = FilteredMails.filter(
-      (mail) => mail.from === "user@appsus.com" && mail.isTrash === false
-    );
-    return Promise.resolve(sent);
-  }
-  return Promise.resolve(FilteredMails);
 }
 
 function getEmailById(emailId) {
@@ -159,16 +117,9 @@ function removeEmail(emailId) {
   return Promise.resolve();
 }
 
-function _add(subject, body, to, isRead, removeAt) {
+function pushMail(email) {
   let emails = _loadFromStorage();
-  const email = createEmail(
-    subject,
-    body,
-    to,
-    (isRead = false),
-    (removeAt = null)
-  );
-  emails = [email, ...emails];
+  emails.unshift(email);
   _saveToStorage(emails);
   return Promise.resolve();
 }
@@ -192,5 +143,47 @@ function _getFilteredMails(mails, filterBy) {
   if (filterBy) mailSearch = filterBy.mailSearch;
   if (mailSearch === "") {
     return mails;
+  }
+}
+function query(filterBy, folderFilter = 0) {
+  let emails = _loadFromStorage();
+  if (!emails) {
+    emails = createEmail();
+    _saveToStorage(emails);
+  }
+  const FilteredMails = _getFilteredMails(emails, filterBy);
+
+  if (folderFilter === 0 && !filterBy) {
+    let notTrash = FilteredMails.filter((mail) => mail.isTrash === false);
+    return Promise.resolve(notTrash);
+  }
+  switch (folderFilter) {
+    case 1:
+      let read = FilteredMails.filter(
+        (mail) => mail.isRead === true && mail.isTrash === false
+      );
+      return Promise.resolve(read);
+    case 2:
+      let unread = FilteredMails.filter(
+        (mail) => mail.isRead === false && mail.isTrash === false
+      );
+      return Promise.resolve(unread);
+    case 3:
+      let isStar = FilteredMails.filter(
+        (mail) => mail.star === true && mail.isTrash === false
+      );
+      return Promise.resolve(isStar);
+
+    case 4:
+      let showTrash = FilteredMails.filter((mail) => mail.isTrash === true);
+      return Promise.resolve(showTrash);
+    case 5:
+      let sent = FilteredMails.filter(
+        (mail) => mail.from === "user@appsus.com" && mail.isTrash === false
+      );
+      return Promise.resolve(sent);
+
+    default:
+      return Promise.resolve(FilteredMails);
   }
 }

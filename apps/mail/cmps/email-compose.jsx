@@ -7,7 +7,7 @@ export class ComposeMail extends React.Component {
       to: '',
       subject: '',
       text: '',
-    };
+         };
   
     handleChange = ({ target }) => {
       const field = target.name;
@@ -16,23 +16,31 @@ export class ComposeMail extends React.Component {
     };
     onCompose = (ev) => {
         ev.preventDefault();
-        mailService.createEmail(this.state);
+      var email =  mailService.createEmail(this.state);
+      console.log(`email = `, email)
+      mailService.pushMail(email)
         this.setState({ to: '', subject: '', text: '' });
-        this.props.closeCompose();
       };
-
-    
+  
+  onComposeClick = () => {
+         let {display} = this.state
+         display = (display = '') ? 'none' : 'none'
+       this.setState({display : display}) 
+  }
       render(){
-        const { to, subject, text } = this.state;
+          
+        const {display, to, subject, text } = this.state;
       return(
-        <div className='compose-mail'>
+          <div>
+
+        <div className={`compose-mail ${display}`}>
         <div className='new-header'>
-          <span>Compose an email</span>
+          <span >Compose an email</span>
           <span className='close' onClick={this.props.closeComposeMail}>
           </span>
         </div>
         <form onSubmit={this.onCompose}>
-          <div className='to-subject'>
+          <div className='to'>
             <input
               type='text'
               name='to'
@@ -58,11 +66,12 @@ export class ComposeMail extends React.Component {
             </form>
             <div className='send'>
               <div className='ComposeSend' onClick={this.onCompose}>
-                Send
+                Send Email
               </div>
               </div>
 </div>
-)
+</div>)
 
       }
+      
     }

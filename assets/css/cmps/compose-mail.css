@@ -1,0 +1,29 @@
+.compose-mail {
+    position: absolute;
+    right: 80px;
+    top: 200px;
+    background-color: var(--main-bg);
+    border: 1px solid black;
+    height: 30%;
+    width: 20%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: rgb(5, 5, 5);
+}
+
+
+.new-header {
+    padding: 10px;
+}
+
+.ComposeSend {
+    border: 1px solid black;
+    padding: 10px;
+    width: 48%;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.close {
+    cursor: pointer;
+}
