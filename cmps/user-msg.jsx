@@ -9,7 +9,6 @@ export class UserMsg extends React.Component {
 	timeoutId
 
 	componentDidMount() {
-		console.log('user msg Mountedddd')
 		this.removeEvent = eventBusService.on('user-msg', (msg) => {
 			console.log('msg from event listener', msg)
 			this.setState({ msg })

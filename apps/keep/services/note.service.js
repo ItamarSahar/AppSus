@@ -10,9 +10,14 @@ export const noteService = {
 	createVideoNote,
 	query,
 	deleteTodo,
-	getNoteById,
 	updateNotes,
-	getNoteById
+	getNoteById,
+	// saveNote,
+	updateNote,
+	getNoteIdxById,
+	getNotes: _getNotes,
+	onChangeTxtNote,
+	onChangeImgNote,
 }
 
 function query() {
@@ -26,63 +31,123 @@ function query() {
 }
 
 function createTxtNote(txt) {
-	return {
+	let notes = _loadFromStorage()
+	const newTxtNote = {
 		id: utilService.makeId(),
 		type: 'txt',
 		isPinned: false,
 		info: { txt },
 	}
+	notes.push(newTxtNote)
+	_saveToStorage(notes)
 }
-function createTodosNote(label, todos) {
-	return {
+
+function onChangeTxtNote(note, txt) {
+	let notes = _loadFromStorage()
+	const newTxtNote = {
+		id: note.id,
+		type: 'txt',
+		isPinned: false,
+		info: { txt },
+	}
+	const noteIdx = getNoteIdxById(newTxtNote.id)
+	notes.splice(noteIdx, 1, newTxtNote)
+	_saveToStorage(notes)
+	return
+}
+
+function createTodosNote(info) {
+	const { label, todos } = info
+	const newTodos = _getTodos(todos)
+	console.log(newTodos)
+	let notes = _loadFromStorage()
+	const newTodosNote = {
 		id: utilService.makeId(),
 		type: 'todos',
 		info: {
 			label,
-			todos,
+			todos: newTodos,
 		},
 	}
+	notes.push(newTodosNote)
+	_saveToStorage(notes)
 }
 function createImgNote(url, title) {
-	return {
+	let notes = _loadFromStorage()
+	const newImgNote = {
 		id: utilService.makeId(),
 		type: 'img',
 		info: { url, title },
 	}
-}
-function createVideoNote(label, url, title) {
-	return {
-		id: utilService.makeId(label),
-		type: 'video',
-		info: {
-			label,
-			info: { url, title },
-		},
-	}
-}
-
-function _add(noteToAdd, cb) {
-	let notes = _loadFromStorage()
-	const note = cb(noteToAdd)
-	notes = [note, ...notes]
+	notes.push(newImgNote)
 	_saveToStorage(notes)
-	return Promise.resolve()
 }
 
+function onChangeImgNote(note, url, title) {
+	let notes = _loadFromStorage()
+	const newImgNote = {
+		id: note.id,
+		type: 'img',
+		info: { url, title },
+	}
+	const noteIdx = getNoteIdxById(newImgNote.id)
+	notes.splice(noteIdx, 1, newImgNote)
+	_saveToStorage(notes)
+	return
+}
 
+function createVideoNote(url, title) {
+	let notes = _loadFromStorage()
+	const newVideoNote = {
+		id: utilService.makeId(),
+		type: 'video',
+		info: { url, title },
+	}
+	notes.push(newVideoNote)
+	_saveToStorage(notes)
+}
 
 function deleteTodo(idx, note) {
 	let { todos } = note.info
 	let notes = _loadFromStorage()
-	todos = todos.splice(idx, 1)
-	const noteIdx = getNoteById(note.id)
+	todos.splice(idx, 1)
+	const noteIdx = getNoteIdxById(note.id)
 	notes.splice(noteIdx, 1, note)
 	_saveToStorage(notes)
 	return
 }
 
+function saveNote(note) {
+	if (note.type === 'todos') {
+		console.log(note)
+		note = _getTodos(note.info.todos)
+		console.log(note)
+	}
+	if (note.id) return updateNote(note)
+	else return createNote(note)
+}
+
+function createNote(note) {
+	if (note.type === 'txt') return createTxtNote(note)
+	else if (note.type === 'img') return createImgNote(note)
+	else if (note.type === 'video') return createVideoNote(note)
+	else if (note.type === 'todos') return createTodosNote(note)
+}
+
+function updateNote(noteToUpdate) {
+	let notes = _loadFromStorage()
+	notes = notes.map((note) =>
+		note.id === noteToUpdate.id ? noteToUpdate : note
+	)
+	_saveToStorage(notes)
+	return notes
+}
+
 function getNoteById(noteId) {
-	console.log(noteId)
+	let notes = _loadFromStorage()
+	return notes.find((note) => noteId === note.id)
+}
+function getNoteIdxById(noteId) {
 	let notes = _loadFromStorage()
 	return notes.findIndex((note) => noteId === note.id)
 }
@@ -91,18 +156,24 @@ function updateNotes(notes) {
 	_saveToStorage(notes)
 }
 
+function _getTodos(todos) {
+	const newTodos = todos.split(',')
+	return newTodos.map((todo) => ({ txt: todo, doneAt: null }))
+}
+
 function _getNotes() {
 	return [
 		{
 			id: utilService.makeId(),
 			type: 'txt',
-			isPinned: true,
+			isPinned: false,
 			info: { txt: 'Fullstack Me Baby!' },
 			bgColor: utilService.getRandomColor(),
 		},
 		{
 			id: utilService.makeId(),
 			type: 'img',
+			isPinned: false,
 			info: {
 				url: '../../../assets/img/parrots_paradise.jpg',
 				title: 'Bobi and Me',
@@ -113,6 +184,7 @@ function _getNotes() {
 		{
 			id: utilService.makeId(),
 			type: 'todos',
+			isPinned: false,
 			info: {
 				label: 'Get my stuff together',
 				todos: [
@@ -125,7 +197,7 @@ function _getNotes() {
 		{
 			id: utilService.makeId(),
 			type: 'video',
-			label: 'Get my stuff together',
+			isPinned: false,
 			info: {
 				url: 'https://www.youtube.com/watch?v=l_Zb2W18MHc&ab_channel=MontyKamal',
 				title: 'Itachi',

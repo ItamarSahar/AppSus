@@ -1,6 +1,6 @@
 import { NoteTodo } from './note-todo.jsx'
 import { noteService } from '../services/note.service.js'
-
+const { Link } = ReactRouterDOM
 export class NoteTodos extends React.Component {
 	state = {
 		todos: this.props.note.info,
@@ -17,9 +17,9 @@ export class NoteTodos extends React.Component {
 		const { todos } = this.props.note.info
 		const { label } = this.props.note.info
 		const { onRemoveNote } = this.props
-		console.log(todos)
 		return (
 			<section className="note-todos">
+				<Link to={`/keep/edit/${note.type}/${note.id}`}>Update Note </Link>
 				<button onClick={() => onRemoveNote(note)}>X</button>
 				<ul>
 					<h5>{label}</h5>

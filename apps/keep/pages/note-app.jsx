@@ -1,6 +1,7 @@
 import { NoteList } from '../cmps/note-list.jsx'
 import { NoteFilter } from '../cmps/note-filter.jsx'
 import { noteService } from '../services/note.service.js'
+import { AddNote } from '../cmps/add-note.jsx'
 
 export class NoteApp extends React.Component {
 	state = {
@@ -14,24 +15,24 @@ export class NoteApp extends React.Component {
 	loadNotes = () => {
 		noteService.query().then((notes) => {
 			this.setState({ notes })
-			console.log(this.state)
 		})
 	}
 
 	onRemoveNote = (note) => {
-		let {notes} = this.state
-		const noteIdx = noteService.getNoteById(note.id)
-		notes.splice(noteIdx ,1 )
+		let { notes } = this.state
+		const noteIdx = noteService.getNoteIdxById(note.id)
+		notes.splice(noteIdx, 1)
 		noteService.updateNotes(notes)
-		this.setState({notes})
+		this.loadNotes()
 	}
 
 	render() {
 		const { notes } = this.state
 		return (
 			<section>
+				<AddNote />
 				<NoteFilter />
-				<NoteList notes={notes} onRemoveNote={this.onRemoveNote}/>
+				<NoteList notes={notes} onRemoveNote={this.onRemoveNote} />
 			</section>
 		)
 	}

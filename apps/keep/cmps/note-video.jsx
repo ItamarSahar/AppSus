@@ -1,5 +1,5 @@
 import { noteService } from '../services/note.service.js'
-
+const { Link } = ReactRouterDOM
 export class NoteVideo extends React.Component {
 	state = {
 		src: '',
@@ -24,6 +24,7 @@ export class NoteVideo extends React.Component {
 
 		return (
 			<section className="note-video">
+				<Link to={`/keep/edit/${note.type}/${note.id}`}>Update Note </Link>
 				<button onClick={() => onRemoveNote(note)}>X</button>
 				<h1>{note.type}</h1>
 				<h2>{note.info.title}</h2>
