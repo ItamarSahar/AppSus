@@ -73,10 +73,7 @@ export class MailApp extends React.Component {
 
   onMoveToTrash = (mailId) => {
     let mails = mailService.loadMails();
-    if (this.state.folderFilter === 4) {
-      mailService.removeEmail(mailId) 
-     } 
-      else {
+ {
       mails.map((mail) => {
         if (mail.id === mailId) {
           mail.isTrash = true;
@@ -105,7 +102,9 @@ export class MailApp extends React.Component {
         <div className='header-mail'>
         </div>
         <div className='body-mail flex'>
-        <header className ="mail-header"></header>
+        <header className ="mail-header">        <MailHeader             onSetFilter={this.onSetFilter}
+/>
+</header>
           <MailFolderList
           
             mails={mails}
