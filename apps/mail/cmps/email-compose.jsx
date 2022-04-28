@@ -27,7 +27,7 @@ export class ComposeMail extends React.Component {
             onCompose = (ev) => {
                 const {to, subject, body } = this.state.mail;
                  const{RefreshMails} = this.props
-
+                 this.CloseCompose()
         ev.preventDefault();
      mailService.createEmail(subject,body,to).then(this.setState(({mail: {subject: '',body: '',to: '' }}), () => {
         RefreshMails()
@@ -39,6 +39,12 @@ export class ComposeMail extends React.Component {
                    button = 'flex' ?  'none' : 'flex'
                    this.setState({display:{compose,button}})
             }
+     CloseCompose = () => {
+        let { button,compose } = this.state.display
+        compose = 'block' ? 'none' : 'block'
+        button = 'none' ?  'flex' : 'none'
+        this.setState({display:{compose,button}})
+ }
      
       render(){
           
@@ -78,7 +84,7 @@ export class ComposeMail extends React.Component {
                         </div>
 
             </form>
-            <div className='send' onClick = {this.openCompose}>
+            <div className='send'>
               <div className='ComposeSend' onClick={this.onCompose} >
                 Send Email
               </div>
