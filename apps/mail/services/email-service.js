@@ -2,11 +2,11 @@ import { utilService } from "../../../services/util.service.js";
 import { storageService } from "../../../services/storage.service.js";
 
 export const mailService = {
-  createEmail: createEmail,
+  createEmail,
   query,
   getEmailById,
   removeEmail,
-  _add,
+  pushMail,
   saveMails,
   loadMails,
 };
@@ -29,6 +29,7 @@ const gEmails = [
     isOpen: false,
     to: "momo@momo.com",
     isTrash: false,
+    from: "user@appsus.com",
   },
   {
     id: "e102",
@@ -40,6 +41,7 @@ const gEmails = [
     isOpen: false,
     to: "momo@momo.com",
     isTrash: false,
+    from: "user@appsus.com",
   },
   {
     id: "e103",
@@ -51,6 +53,7 @@ const gEmails = [
     isOpen: false,
     to: "momo@momo.com",
     isTrash: false,
+    from: "user@appsus.com",
   },
   {
     id: "e104",
@@ -62,17 +65,19 @@ const gEmails = [
     isOpen: false,
     to: "momo@momo.com",
     isTrash: false,
+    from: "user@appsus.com",
   },
   {
     id: "e105",
     subject: "Not a scam?",
-    body: "This is not a scam",
+    body: "This is not a scamSpecific pricing and discounts may be subject to change. Please check the Steam store page for details You are receiving this email because the above item is on your Steam Wishlist",
     isRead: false,
     sentAt: 1551133930594,
     isStarred: false,
     isOpen: false,
     to: "muki@bendavid.com",
     isTrash: false,
+    from: "user@appsus.com",
   },
 ];
 
@@ -85,27 +90,25 @@ const criteria = {
 };
 _saveToStorage(gEmails);
 
-function createEmail(subject, body, to, isRead = false, isStarred) {
-  return {
+function createEmail(subject, body, to) {
+  let emails = _loadFromStorage();
+  const email = {
     id: utilService.makeId(),
     subject,
     body,
-    isRead,
+    isRead: false,
     sentAt: new Date(),
     to,
     isStarred: false,
     isOpen: false,
     isTrash: false,
   };
+  emails.push(email);
+  _saveToStorage(emails);
+  console.log(email);
+  return Promise.resolve();
 }
-function query(filterBy) {
-  let emails = _loadFromStorage();
-  if (!emails) {
-    emails = createEmail();
-    _saveToStorage(emails);
-  }
-  return Promise.resolve(emails);
-}
+
 function getEmailById(emailId) {
   const emails = _loadFromStorage();
   const email = emails.find((email) => emailId === email.id);
@@ -119,16 +122,9 @@ function removeEmail(emailId) {
   return Promise.resolve();
 }
 
-function _add(subject, body, to, isRead, removeAt) {
+function pushMail(email) {
   let emails = _loadFromStorage();
-  const email = createEmail(
-    subject,
-    body,
-    to,
-    (isRead = false),
-    (removeAt = null)
-  );
-  emails = [email, ...emails];
+  emails.unshift(email);
   _saveToStorage(emails);
   return Promise.resolve();
 }
@@ -146,4 +142,53 @@ function saveMails(mails) {
 
 function loadMails() {
   return _loadFromStorage();
+}
+function _getFilteredMails(mails, filterBy) {
+  let mailSearch = "";
+  if (filterBy) mailSearch = filterBy.mailSearch;
+  if (mailSearch === "") {
+    return mails;
+  }
+}
+function query(filterBy, folderFilter = 0) {
+  let emails = _loadFromStorage();
+  if (!emails) {
+    emails = createEmail();
+    _saveToStorage(emails);
+  }
+  const FilteredMails = _getFilteredMails(emails, filterBy);
+
+  if (folderFilter === 0 && !filterBy) {
+    let notTrash = FilteredMails.filter((mail) => mail.isTrash === false);
+    return Promise.resolve(notTrash);
+  }
+  switch (folderFilter) {
+    case 1:
+      let read = FilteredMails.filter(
+        (mail) => mail.isRead === true && mail.isTrash === false
+      );
+      return Promise.resolve(read);
+    case 2:
+      let unread = FilteredMails.filter(
+        (mail) => mail.isRead === false && mail.isTrash === false
+      );
+      return Promise.resolve(unread);
+    case 3:
+      let isStar = FilteredMails.filter(
+        (mail) => mail.star === true && mail.isTrash === false
+      );
+      return Promise.resolve(isStar);
+
+    case 4:
+      let showTrash = FilteredMails.filter((mail) => mail.isTrash === true);
+      return Promise.resolve(showTrash);
+    case 5:
+      let sent = FilteredMails.filter(
+        (mail) => mail.from === "user@appsus.com" && mail.isTrash === false
+      );
+      return Promise.resolve(sent);
+
+    default:
+      return Promise.resolve(FilteredMails);
+  }
 }

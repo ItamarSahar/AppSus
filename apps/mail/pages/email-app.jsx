@@ -3,11 +3,14 @@ import { mailService } from '../services/email-service.js';
 import {EmailList} from '../cmps/email-list.jsx'
 import {MailHeader} from '../cmps/email-header.jsx'
 import {MailFolderList} from '../cmps/email-folder-list.jsx'
+import {ComposeMail} from '../cmps/email-compose.jsx'
 
 export class MailApp extends React.Component {
   state = {
     mails: [],
     filterBy: null,
+    isNewMail: false,
+
     folderFilter: 0,
   };
 
@@ -15,16 +18,16 @@ export class MailApp extends React.Component {
     this.loadMails()
       .then(() => {
         let { mails } = this.state;
-        console.log('mounting');
         mails.map((mail) => (mail.isOpen = false));
         mailService.saveMails(mails);
       })
       .then(() => this.loadMails());
   }
 
+ 
   loadMails = () => {
-    const { filterBy } = this.state;
-    mailService.query(filterBy).then((mails) => {
+    const { filterBy,folderFilter } = this.state;
+    mailService.query(filterBy,folderFilter).then((mails) => {
       this.setState({ mails });
     });
     return Promise.resolve();
@@ -64,18 +67,20 @@ export class MailApp extends React.Component {
     });
     mailService.saveMails(mails);
   }
+  composeMail = () => {
+    this.setState({ isNewMail: true }, this.loadMails);
+  };
 
   onMoveToTrash = (mailId) => {
     let mails = mailService.loadMails();
-    if (this.state.folderFilter === 4) {
-      mailService.removeEmail(mailId)    } 
-      else {
+ {
       mails.map((mail) => {
         if (mail.id === mailId) {
           mail.isTrash = true;
         }
       });
       mailService.saveMails(mails);
+      this.loadMails()
     }
   };
 
@@ -87,16 +92,22 @@ export class MailApp extends React.Component {
     let percent = (unreadCount / mails.length) * 100;
     return percent
   }
+  RefreshMails = () => {
+   const mails =  mailService.loadMails()
+   this.setState({mails})
+  };
   render() {
-    const { mails, filterBy} = this.state;
+    const { mails, filterBy, isNewMail} = this.state;
     return (
       <div className='mail-app'>
         <div className='header-mail'>
         </div>
         <div className='body-mail flex'>
-        <header class ="mail-header"></header>
-
+        <header className ="mail-header">   <MailHeader onSetFilter={this.onSetFilter}
+/>
+</header>
           <MailFolderList
+          
             mails={mails}
             onFolderFilter={this.onFolderFilter}
             showUnreadCount={this.showUnreadCount}
@@ -109,7 +120,10 @@ export class MailApp extends React.Component {
             loadMails={this.loadMails}
             mails={mails}
           />
-<footer class ="app-footer"></footer>
+
+            <ComposeMail RefreshMails={this.RefreshMails} />
+       
+<footer className ="app-footer"></footer>
         </div>
       </div>
     );

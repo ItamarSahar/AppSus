@@ -3,6 +3,7 @@
     display: flex;
     gap: 15px;
     text-align: left;
+    cursor: pointer;
 }
 
 .subject-preview {
@@ -10,7 +11,7 @@
 }
 
 .text-preview {
-    width: 370px;
+    width: 770px;
 }
 
 .mail-preview td {

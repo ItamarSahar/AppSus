@@ -19,8 +19,11 @@ class _appHeader extends React.Component {
 	render() {
 		let { menu, button } = this.state.display
 		return (
-			<header className="app-header">
+			<header className="app-header">		
+						<NavLink exact to="/">
 				<h3 className="logo">Appsus</h3>
+		</NavLink>
+
 				<i
 					onClick={this.openMenu}
 					className={`menu fa-solid fa-bars ${button}`}
