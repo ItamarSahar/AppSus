@@ -54,7 +54,11 @@ export class ComposeMail extends React.Component {
          console.log(this.state.mail)
       return(
           <div>
-                    <button onClick = {this.openCompose} className ={`compose-button button-17 ${button}`}>Send an Email</button>
+                    <button onClick = {this.openCompose} className ={`compose-button button-17 ${button}`}>          <img
+            src='assets/SVG/Plus_symbol.svg'
+            height='40px'
+          /> Compose
+</button>
         <div className={`compose-mail  ${compose}`}>
         <div className='new-header'>
           <span >Compose an email</span>

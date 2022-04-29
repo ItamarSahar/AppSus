@@ -5,7 +5,8 @@
     align-items: center;
     -webkit-box-shadow: 1px 0px 10px -10px #000000;
     box-shadow: 1px 0px 10px -10px #000000;
-    background-color: var(--main-bg)
+    background-color: var(--main-bg);
+    margin-top: 80px;
 }
 
 .mail-folder-list img {
@@ -50,4 +51,8 @@
     color: rgb(0, 0, 0);
     font-weight: 900;
     cursor: pointer;
+}
+
+.first-li {
+    border-top: 1px solid black;
 }

@@ -29,7 +29,7 @@ const gEmails = [
     isOpen: false,
     to: "momo@momo.com",
     isTrash: false,
-    from: "user@appsus.com",
+    from: "asd@appsus.com",
   },
   {
     id: "e102",
@@ -41,19 +41,19 @@ const gEmails = [
     isOpen: false,
     to: "momo@momo.com",
     isTrash: false,
-    from: "user@appsus.com",
+    from: "they@appsus.com",
   },
   {
     id: "e103",
     subject: "Hey",
-    body: "This is the nigerian price, i offer you 5 milion dollars",
+    body: "This is the nigerian prince, i offer you 5 milion dollars for free sir",
     isRead: false,
     sentAt: 1551133930594,
     isStarred: false,
     isOpen: false,
     to: "momo@momo.com",
     isTrash: false,
-    from: "user@appsus.com",
+    from: "has@appsus.com",
   },
   {
     id: "e104",
@@ -65,19 +65,19 @@ const gEmails = [
     isOpen: false,
     to: "momo@momo.com",
     isTrash: false,
-    from: "user@appsus.com",
+    from: "hey@appsus.com",
   },
   {
     id: "e105",
     subject: "Not a scam?",
-    body: "This is not a scamSpecific pricing and discounts may be subject to change. Please check the Steam store page for details You are receiving this email because the above item is on your Steam Wishlist",
+    body: "This is not a scam Specific pricing and discounts may be subject to change. Please check the Steam store page for details You are receiving this email because the above item is on your Steam Wishlist",
     isRead: false,
     sentAt: 1551133930594,
     isStarred: false,
     isOpen: false,
     to: "muki@bendavid.com",
     isTrash: false,
-    from: "user@appsus.com",
+    from: "hey@appsus.com",
   },
 ];
 
@@ -102,6 +102,7 @@ function createEmail(subject, body, to) {
     isStarred: false,
     isOpen: false,
     isTrash: false,
+    from: loggedinUser.email,
   };
   emails.push(email);
   _saveToStorage(emails);
@@ -156,39 +157,41 @@ function query(filterBy, folderFilter = 0) {
     emails = createEmail();
     _saveToStorage(emails);
   }
-  const FilteredMails = _getFilteredMails(emails, filterBy);
+  const mails = _getFilteredMails(emails, filterBy);
 
   if (folderFilter === 0 && !filterBy) {
-    let notTrash = FilteredMails.filter((mail) => mail.isTrash === false);
+    let notTrash = mails.filter((mail) => mail.isTrash === false);
     return Promise.resolve(notTrash);
   }
   switch (folderFilter) {
     case 1:
-      let read = FilteredMails.filter(
+      let read = mails.filter(
         (mail) => mail.isRead === true && mail.isTrash === false
       );
       return Promise.resolve(read);
     case 2:
-      let unread = FilteredMails.filter(
+      let unread = mails.filter(
         (mail) => mail.isRead === false && mail.isTrash === false
       );
       return Promise.resolve(unread);
     case 3:
-      let isStar = FilteredMails.filter(
+      let isStar = mails.filter(
         (mail) => mail.star === true && mail.isTrash === false
       );
       return Promise.resolve(isStar);
 
     case 4:
-      let showTrash = FilteredMails.filter((mail) => mail.isTrash === true);
+      let showTrash = mails.filter((mail) => mail.isTrash === true);
       return Promise.resolve(showTrash);
     case 5:
-      let sent = FilteredMails.filter(
-        (mail) => mail.from === "user@appsus.com" && mail.isTrash === false
-      );
-      return Promise.resolve(sent);
-
-    default:
-      return Promise.resolve(FilteredMails);
+      {
+        let sent = mails.filter(
+          (mail) =>
+            mail.from === `${loggedinUser.email}` && mail.isTrash === false
+        );
+        return Promise.resolve(sent);
+      }
+      break;
+      return Promise.resolve(mails);
   }
 }

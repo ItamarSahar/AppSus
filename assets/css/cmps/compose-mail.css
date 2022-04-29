@@ -30,6 +30,9 @@
 
 .compose-button {
     position: absolute;
-    left: 5px;
+    left: 17px;
     top: 135px;
+    width: 120px;
+    text-align: left;
+
 }

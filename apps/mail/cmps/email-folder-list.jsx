@@ -12,7 +12,7 @@ export function MailFolderList({
     return (
       <div className='mail-folder-list'>
         <ul>
-          <li onClick={getFolderFilter} value='0'>
+          <li  className ="first-li"onClick={getFolderFilter} value='0'>
           <img className ="inbox-image"
             src='assets/SVG/markAsUnread.svg'
             height='10px'
