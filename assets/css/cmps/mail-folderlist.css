@@ -1,13 +1,11 @@
 .mail-folder-list {
     display: grid;
-    position: absolute;
     left: 15px;
     width: 150px;
     padding: 10px;
     -webkit-box-shadow: 1px 0px 10px -10px #000000;
     box-shadow: 1px 0px 10px -10px #000000;
     background-color: var(--main-bg);
-    margin-top: 20px;
 }
 
 .mail-folder-list img {

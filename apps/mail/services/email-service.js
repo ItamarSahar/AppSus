@@ -16,6 +16,7 @@ const KEY = "emailDB";
 const loggedinUser = {
   email: "user@appsus.com",
   fullname: "Mahatma Appsus",
+  name: "Mahatma Appsus",
 };
 
 const gEmails = [
@@ -30,6 +31,7 @@ const gEmails = [
     to: "momo@momo.com",
     isTrash: false,
     from: "asd@appsus.com",
+    name: "Mahatma Appsus",
   },
   {
     id: "e102",
@@ -42,6 +44,7 @@ const gEmails = [
     to: "momo@momo.com",
     isTrash: false,
     from: "they@appsus.com",
+    name: "Donald Trump",
   },
   {
     id: "e103",
@@ -54,6 +57,7 @@ const gEmails = [
     to: "momo@momo.com",
     isTrash: false,
     from: "has@appsus.com",
+    name: "Elon Musk",
   },
   {
     id: "e104",
@@ -66,6 +70,7 @@ const gEmails = [
     to: "momo@momo.com",
     isTrash: false,
     from: "hey@appsus.com",
+    name: "Gandhi",
   },
   {
     id: "e105",
@@ -78,6 +83,7 @@ const gEmails = [
     to: "muki@bendavid.com",
     isTrash: false,
     from: "hey@appsus.com",
+    name: "Amit Misken",
   },
   {
     id: "e109",
@@ -90,6 +96,33 @@ const gEmails = [
     to: "momo@momo.com",
     isTrash: false,
     from: "has@appsus.com",
+    name: "Avi Ron",
+  },
+  {
+    id: "e149",
+    subject: "Hey",
+    body: "This is the nigerian prince, i offer you 5 milion dollars for free sir",
+    isRead: false,
+    sentAt: 1551133930594,
+    isStarred: false,
+    isOpen: false,
+    to: "momo@momo.com",
+    isTrash: false,
+    from: "has@appsus.com",
+    name: "Mimi Cohen",
+  },
+  {
+    id: "e159",
+    subject: "Hey",
+    body: "This is the nigerian prince, i offer you 5 milion dollars for free sir",
+    isRead: false,
+    sentAt: 1551133930594,
+    isStarred: false,
+    isOpen: false,
+    to: "momo@momo.com",
+    isTrash: false,
+    from: "has@appsus.com",
+    name: "Rami Levi",
   },
 ];
 
@@ -105,6 +138,7 @@ _saveToStorage(gEmails);
 function createEmail(subject, body, to) {
   let emails = _loadFromStorage();
   const email = {
+    name: "Mahatma Appsus",
     id: utilService.makeId(),
     subject,
     body,
@@ -163,7 +197,7 @@ function getFiltered(mails, filterBy) {
     return mails;
   }
   let filtered = mails.filter((mail) => {
-    if (mail.subject.toUpperCase().includes(mailSearch.toUpperCase())) {
+    if (mail.subject.includes(mailSearch.toUpperCase())) {
       return mail;
     }
     if (mail.body.toUpperCase().includes(mailSearch.toUpperCase())) {

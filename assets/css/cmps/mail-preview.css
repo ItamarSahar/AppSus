@@ -1,43 +1,54 @@
 .mail-preview {
-
-    color: black;
+    font-size: .875rem;
+    border-bottom: 0.3px solid rgb(201, 192, 192);
+    padding: 10px 1rem;
     display: flex;
-    cursor: pointer;
-    border-bottom: 0.2px solid rgb(187, 184, 184);
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    position: relative;
+    flex-grow: 1;
+    max-height: 40px;
+    font-size: .75rem;
 }
 
 .subject-preview {
-    width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex-grow: 1;
     text-align: left;
 
 }
 
 .text-preview {
-    width: 770px;
-    margin-left: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 30rem;
     text-align: left;
-    flex-basis: auto;
-    flex-shrink: 3;
-
-
+    flex-basis: 16rem;
+    overflow: hidden;
+    margin-right: 200px;
 }
+
 
 .mail-preview td {
     padding: 20px 10px;
     flex-basis: auto;
     flex-shrink: 3;
 
-
 }
 
 .date-preview {
-    text-align: right;
-
+    white-space: nowrap;
+    margin-inline-end: 7px;
 }
 
 .preview-options {
-    width: 100px;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    border: none;
+    width: 120px
 }
 
 .expand-preview {
@@ -63,6 +74,14 @@
     font-weight: 1000;
 }
 
+.name-preview {
+    min-width: 7rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: left;
+}
 
 .preview-options img {
     margin: 0 4px;

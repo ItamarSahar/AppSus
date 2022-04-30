@@ -29,4 +29,5 @@
 @import './cmps/mail-list.css';
 @import "./cmps/mail-folderlist.css";
 @import "./cmps/mail-preview.css";
-@import "./cmps/compose-mail.css"
+@import "./cmps/compose-mail.css";
+@import "./cmps/responsive-email.css"

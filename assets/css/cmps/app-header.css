@@ -7,6 +7,7 @@
 	background-color: var(--header-bg);
 	font-size: 20px;
 	height: 4rem;
+	z-index: 1;
 }
 
 .nav-header {
@@ -22,6 +23,8 @@
 	transition: 100ms;
 	right: 8px;
 	top: 50px;
+	z-index: 1;
+
 }
 
 .active {

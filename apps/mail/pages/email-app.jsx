@@ -9,9 +9,9 @@ export class MailApp extends React.Component {
   state = {
     mails: [],
     filterBy: null,
+    folderFilter: 0,
     isNewMail: false,
 
-    folderFilter: 0,
   };
 
   componentDidMount() {
@@ -27,6 +27,8 @@ export class MailApp extends React.Component {
  
   loadMails = () => {
     const { filterBy,folderFilter } = this.state;
+    console.log(`filterBy = `, filterBy)
+
     mailService.query(filterBy,folderFilter).then((mails) => {
       this.setState({ mails });
     });
@@ -35,6 +37,7 @@ export class MailApp extends React.Component {
   onSetFilter = (filterBy) => {
     this.setState({ filterBy }, this.loadMails);
   };
+
 
   onFolderFilter = (folderFilter) => {
     this.setState({ folderFilter: folderFilter }, this.loadMails);
@@ -100,12 +103,13 @@ export class MailApp extends React.Component {
     const { mails, filterBy, isNewMail} = this.state;
     return (
       <div className='mail-app'>
-        <div className='header-mail'>
-        </div>
+     
         <div className='body-mail'>
         <header className ="mail-header">   <MailHeader onSetFilter={this.onSetFilter}
 />
 </header>
+
+<ComposeMail RefreshMails={this.RefreshMails} />
           <MailFolderList
           
             mails={mails}
@@ -121,7 +125,6 @@ export class MailApp extends React.Component {
             mails={mails}
           />
 
-            <ComposeMail RefreshMails={this.RefreshMails} />
        
 <footer className ="app-footer"></footer>
         </div>

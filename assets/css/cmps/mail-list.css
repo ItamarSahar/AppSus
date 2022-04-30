@@ -1,12 +1,11 @@
 .mail-list {
-    width: 100%;
+    grid-area: maillist;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    white-space: nowrap;
-    margin-left: 40px;
-    margin-top: 20px;
-    border-left: .3px solid rgb(158, 152, 152);
-
+    justify-content: flex-start;
+    background-color: rgb(254, 255, 254);
+    flex-grow: 4;
+    overflow-y: auto;
+    max-height: 60vh;
+    letter-spacing: .2px;
 }

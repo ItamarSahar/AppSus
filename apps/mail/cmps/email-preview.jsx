@@ -17,7 +17,9 @@ export function MailPreview({
           <img src='assets/SVG/filledStar.svg' alt='star' />
         )}
       </td>
-
+      <td className='name-preview' onClick={togglePreview}>
+        {mail.name}
+      </td>
       <td className='subject-preview' onClick={togglePreview}>
         {mail.subject.length > 20
           ? mail.subject.slice(0, 20) + `...`
@@ -63,13 +65,13 @@ export function MailPreview({
         )}
       </td>
       <td className='from-preview' onClick={togglePreview}>
-        {mail.from}
+       From {mail.from}
       </td>
       <td className='expand-preview-cell' onClick={togglePreview}>
         <div className='expand-preview-cell-content'>
           <div onClick={togglePreview} className='from-preview-open flex'>
             <h3>
-             {mail.to}
+            {mail.subject}
             </h3>
           </div>
           <div onClick={togglePreview} className='text-preview-open'>
