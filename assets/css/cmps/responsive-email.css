@@ -1,0 +1,147 @@
+@media screen and (max-width: 821px) {
+    .mail-list {
+        grid-area: maillist;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        background-color: rgb(254, 255, 254);
+        flex-grow: 4;
+        overflow-y: auto;
+        height: 60vh;
+        letter-spacing: .2px;
+    }
+
+
+    .mail-preview {
+        font-size: .775rem;
+        border-bottom: 0.3px solid rgb(201, 192, 192);
+        padding: 9px 0.1rem;
+        display: flex;
+        align-items: left;
+        gap: 3px;
+        justify-content: flex-start;
+        position: relative;
+        flex-grow: 1;
+        max-height: 40px;
+    }
+
+    .subject-preview {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        flex-grow: 1;
+        text-align: left;
+        flex-basis: auto;
+        flex-shrink: 3;
+        display: none;
+
+    }
+
+    .text-preview {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 30rem;
+        text-align: left;
+        flex-basis: 16rem;
+        overflow: hidden;
+        margin: 0;
+        display: none;
+    }
+
+
+    .mail-preview td {
+        padding: 20px 10px;
+        flex-basis: auto;
+        flex-shrink: 3;
+
+    }
+
+    .date-preview {
+        white-space: nowrap;
+        margin-inline-end: 7px;
+    }
+
+    .preview-options {
+        display: flex;
+        justify-content: flex-end;
+        border: none;
+        max-width: 120px;
+        flex-basis: auto;
+        flex-shrink: 4;
+
+    }
+
+    .expand-preview {
+        height: 100px;
+        flex-basis: auto;
+        flex-shrink: 4;
+
+    }
+
+    .expand-preview-cell {
+        white-space: normal;
+        position: relative;
+        overflow: visible;
+        flex-basis: auto;
+        flex-shrink: 4;
+
+    }
+
+    .expand-preview-cell-content {
+        top: 0;
+        text-align: left;
+        width: 150px;
+        flex-basis: auto;
+        flex-shrink: 4;
+
+    }
+
+    .bold {
+        font-family: robo-bold;
+        font-weight: 1000;
+    }
+
+    .name-preview {
+        max-width: 2rem;
+        margin: 0;
+        padding: 0px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-align: left;
+        flex-basis: auto;
+        flex-shrink: 4;
+
+    }
+
+    .preview-options img {
+        margin: 0 4px;
+        opacity: 0.5;
+        transition: 0.7s ease-in-out all;
+    }
+
+    .preview-options img:hover {
+        margin: 0 4px;
+        opacity: 1.5;
+        transform: scale(1.2);
+    }
+
+    .mail-preview:hover {
+        color: #ccc;
+    }
+
+    .star-preview img {
+        height: 20px;
+    }
+
+    .star-preview {
+        transition: 0.3s ease-in-out all;
+
+    }
+
+    .star-preview:hover {
+        transform: scale(1.2);
+
+    }
+}

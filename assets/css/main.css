@@ -29,7 +29,6 @@
 @import "./cmps/mail-folderlist.css";
 @import "./cmps/mail-preview.css";
 @import "./cmps/compose-mail.css";
-@import "./cmps/responsive-email.css";
 @import './cmps/mail-folderlist.css';
 @import './cmps/mail-preview.css';
 @import './cmps/compose-mail.css';
@@ -43,4 +42,5 @@
 
 /* mq */
 
-@import './mq/keep-mq.css'
+@import './mq/keep-mq.css';
+@import "./cmps/responsive-email.css";
