@@ -19,7 +19,6 @@
     flex-direction: column;
     align-items: center;
     padding: 0;
-
 }
 
 .mail-folder-list li {
@@ -37,7 +36,6 @@
     align-items: center;
     justify-content: center;
     list-style: none;
-    width: 100%;
     height: 25px;
     padding: 15px 8px;
     transition: 0.2s ease-in-out all;

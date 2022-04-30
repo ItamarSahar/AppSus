@@ -14,17 +14,15 @@
     justify-content: start;
     align-items: center;
     background-color: #F1F3F4;
-
+    border: none;
+    height: 50px;
 }
 
-.search-mail {
-    -webkit-box-shadow: 1px 0px 10px -10px #000000;
-    box-shadow: 1px 0px 10px -10px #000000
-}
 
 .mail-search-form {
     width: 100%;
     background-color: transparent;
+    text-decoration: none;
 }
 
 .mail-search-input {
@@ -33,6 +31,9 @@
     font-size: 1.4rem;
     background-color: transparent;
     outline: transparent;
+    text-decoration: none;
+
+
 }
 
 .mail-search-input {

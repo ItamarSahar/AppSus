@@ -6,6 +6,6 @@
     background-color: rgb(254, 255, 254);
     flex-grow: 4;
     overflow-y: auto;
-    max-height: 60vh;
+    height: 60vh;
     letter-spacing: .2px;
 }

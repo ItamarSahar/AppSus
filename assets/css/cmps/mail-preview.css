@@ -9,7 +9,6 @@
     position: relative;
     flex-grow: 1;
     max-height: 40px;
-    font-size: .75rem;
 }
 
 .subject-preview {
@@ -111,10 +110,4 @@
 .star-preview:hover {
     transform: scale(1.2);
 
-}
-
-@media only screen and (max-width: 768px) {
-    .text-preview {
-        transform: scale(0.5);
-    }
 }
