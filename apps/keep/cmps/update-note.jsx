@@ -1,8 +1,8 @@
 import { UpdateImgNote } from './update-img-note.jsx'
-// import { UpdateVideoNote } from './update-video-note.jsx'
+import { UpdateVideoNote } from './update-video-note.jsx'
 import { UpdateTxtNote } from './update-txt-note.jsx'
 import { noteService } from '../services/note.service.js'
-// import { UpdateTodoNote } from './update-todo-note.jsx'
+import { UpdateTodoNote } from './update-todo-note.jsx'
 
 export class UpdateNote extends React.Component {
 	state = {
@@ -12,8 +12,8 @@ export class UpdateNote extends React.Component {
 	components = {
 		txt: UpdateTxtNote,
 		img: UpdateImgNote,
-		// todos: UpdateTodoNote,
-		// video: UpdateVideoNote,
+		todos: UpdateTodoNote,
+		video: UpdateVideoNote,
 	}
 
 	componentDidMount() {

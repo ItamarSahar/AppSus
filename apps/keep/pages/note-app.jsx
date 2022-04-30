@@ -17,6 +17,10 @@ export class NoteApp extends React.Component {
 			this.setState({ notes })
 		})
 	}
+	onDuplicateNote = (note) => {
+		noteService.onDuplicateNote(note.id)
+		this.loadNotes()
+	}
 
 	onRemoveNote = (note) => {
 		let { notes } = this.state
@@ -31,8 +35,8 @@ export class NoteApp extends React.Component {
 		return (
 			<section>
 				<AddNote />
-				<NoteFilter />
-				<NoteList notes={notes} onRemoveNote={this.onRemoveNote} />
+				{/* <NoteFilter /> */}
+				<NoteList notes={notes} onDuplicateNote={this.onDuplicateNote} onRemoveNote={this.onRemoveNote} />
 			</section>
 		)
 	}

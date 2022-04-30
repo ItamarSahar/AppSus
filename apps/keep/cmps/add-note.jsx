@@ -1,8 +1,7 @@
-
 const { Link } = ReactRouterDOM
 export class AddNote extends React.Component {
 	state = {
-		type: '',
+		type: 'txt',
 	}
 
 	setType = (type) => {
@@ -13,21 +12,26 @@ export class AddNote extends React.Component {
 		const { type } = this.state
 		return (
 			<section className="add-note">
-				<h1>add note!</h1>
-				<button className="add-btn" onClick={() => this.setType('txt')}>
-					text Note
-				</button>
-				<button className="add-btn" onClick={() => this.setType('todos')}>
-					Todos Note
-				</button>
-				<button className="add-btn" onClick={() => this.setType('img')}>
-					img Note
-				</button>
-				<button className="add-btn" onClick={() => this.setType('video')}>
-					video Note
-				</button>
+				<button
+					className="add-txt-btn fo"
+					onClick={() => this.setType('txt')}
+				></button>
+				<button
+					className="add-todos-btn fo"
+					onClick={() => this.setType('todos')}
+				></button>
+				<button
+					className="add-img-btn fo"
+					onClick={() => this.setType('img')}
+				></button>
+				<button
+					className="add-video-btn fo"
+					onClick={() => this.setType('video')}
+				></button>
 
-				{type && <Link to={`/keep/edit/${type}`}>{`Add ${type} NOTE!`}</Link>}
+				<Link to={`/keep/edit/${type}`}>
+					<button className="add-note-btn">{`Add ${type} NOTE!`}</button>
+				</Link>
 			</section>
 		)
 	}

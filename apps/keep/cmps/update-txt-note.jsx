@@ -4,10 +4,20 @@ export class UpdateTxtNote extends React.Component {
 	state = {
 		txt: '',
 	}
+
+	componentDidMount() {
+		this.loadNote()
+	}
 	handleChange = ({ target }) => {
 		const value = target.value
 		const field = target.name
 		this.setState((prevState) => ({ ...prevState, [field]: value }))
+	}
+
+	loadNote = () => {
+		const { note } = this.props
+		const { txt } = note.info
+		this.setState({ txt })
 	}
 
 	render() {
@@ -19,7 +29,7 @@ export class UpdateTxtNote extends React.Component {
 					name="txt"
 					type="text"
 					placeholder="Enter a text"
-					value={txt}
+					value={txt || ''}
 					onChange={this.handleChange}
 				/>
 				<button

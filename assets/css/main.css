@@ -12,8 +12,7 @@
 /* Views */
 
 @import './pages/book-details.css';
-@import "./pages/email-app.css";
-
+@import './pages/email-app.css';
 
 /* Cmps */
 
@@ -27,6 +26,17 @@
 @import './cmps/note-list.css';
 @import './cmps/mail-header.css';
 @import './cmps/mail-list.css';
-@import "./cmps/mail-folderlist.css";
-@import "./cmps/mail-preview.css";
-@import "./cmps/compose-mail.css"
+@import './cmps/mail-folderlist.css';
+@import './cmps/mail-preview.css';
+@import './cmps/compose-mail.css';
+@import './cmps/note-img.css';
+@import './cmps/note-video.css';
+@import './cmps/note-txt.css';
+@import './cmps/note-todos.css';
+@import './cmps/colors.css';
+@import './cmps/add-note.css';
+
+
+/* mq */
+
+@import './mq/keep-mq.css'

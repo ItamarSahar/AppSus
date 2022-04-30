@@ -1,0 +1,4 @@
+.note-txt {
+	display: flex;
+	flex-direction: column-reverse;
+}

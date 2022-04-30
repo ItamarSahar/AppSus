@@ -1,0 +1,4 @@
+.note-video {
+	display: flex;
+	flex-direction: column-reverse;
+}

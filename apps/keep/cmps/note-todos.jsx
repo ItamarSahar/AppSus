@@ -16,13 +16,26 @@ export class NoteTodos extends React.Component {
 		const { note } = this.props
 		const { todos } = this.props.note.info
 		const { label } = this.props.note.info
-		const { onRemoveNote } = this.props
+		const { onRemoveNote ,onDuplicateNote } = this.props
 		return (
 			<section className="note-todos">
-				<Link to={`/keep/edit/${note.type}/${note.id}`}>Update Note </Link>
-				<button onClick={() => onRemoveNote(note)}>X</button>
-				<ul>
-					<h5>{label}</h5>
+				<section className="btn-container ">
+					<Link to={`/keep/edit/${note.type}/${note.id}`}>
+						<button className="btn-update-note"></button>
+					</Link>
+					<button
+						onClick={() => onRemoveNote(note)}
+						className="btn-delete-note"
+					></button>
+							<button
+					onClick={() => onDuplicateNote(note)}
+					className="btn-duplicate-note"
+				>
+					duplicate
+				</button>
+				</section>
+				<ul className="todos-list">
+					<h5 className="note-header">{label}</h5>
 					{todos.map((todo, idx) => (
 						<NoteTodo
 							todo={todo}

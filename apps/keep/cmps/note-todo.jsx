@@ -1,7 +1,8 @@
 export function NoteTodo({ todo, idx, onDeleteTodo }) {
 	return (
 		<li>
-			{todo.txt} <button onClick={() => onDeleteTodo(idx)}>X</button>
+			<p>{todo.txt}</p>
+			<button onClick={() => onDeleteTodo(idx)} className="btn-todo"></button>
 		</li>
 	)
 }
