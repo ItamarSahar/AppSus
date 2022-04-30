@@ -190,30 +190,20 @@ function saveMails(mails) {
 function loadMails() {
   return _loadFromStorage();
 }
-function getFiltered(mails, filterBy) {
-  let mailSearch = "";
-  if (filterBy) mailSearch = filterBy.mailSearch;
-  if (mailSearch === "") {
-    return mails;
-  }
-  let filtered = mails.filter((mail) => {
-    if (mail.subject.includes(mailSearch.toUpperCase())) {
-      return mail;
-    }
-    if (mail.body.toUpperCase().includes(mailSearch.toUpperCase())) {
-      return mail;
-    }
-  });
-  return filtered;
-}
 function query(filterBy, folderFilter = 0) {
-  let emails = _loadFromStorage();
-  if (!emails) {
-    emails = createEmail();
-    _saveToStorage(emails);
+  let mails = _loadFromStorage();
+  if (!mails) {
+    mails = createEmail();
+    _saveToStorage(mails);
   }
-  const mails = getFiltered(emails, filterBy);
+  if (filterBy) {
+    mails = mails.filter((mail) => {
+      if (mail.subject.includes(filterBy.filterSearch)) return mail;
+      if (mail.body.includes(filterBy.filterSearch)) return mail;
+    });
 
+    return Promise.resolve(mails);
+  }
   if (folderFilter === 0 && !filterBy) {
     let notTrash = mails.filter((mail) => mail.isTrash === false);
     return Promise.resolve(notTrash);

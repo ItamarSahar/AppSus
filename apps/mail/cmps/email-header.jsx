@@ -1,25 +1,29 @@
 
 export class MailHeader extends React.Component {
   state = {
-    mailSearch: '',
+    filterSearch: '',
   };
 
   handleChange = ({ target }) => {
     const field = target.name;
     const value = target.value;
     this.setState((prevState) => ({ ...prevState, [field]: value }));
-
+    this.props.onSetFilter(this.state)
   };
 
   onFilter = (ev) => {
     ev.preventDefault();
     this.props.onSetFilter(this.state);
-    this.resetForm();
+    this.clear();
   };
-
+  clear = () => {
+    let {filterSearch} = this.state
+    filterSearch = ''
+    this.setState({filterSearch})
+  }
 
   render() {
-    const { mailSearch } = this.state;
+    const { filterSearch } = this.state;
     return (
       <div className='m'>
        
@@ -27,9 +31,10 @@ export class MailHeader extends React.Component {
             
         
   <form onSubmit={this.onFilter} className ="mail-search-form"role="search">
-  <label htmlFor="text">Search for stuff</label>
-  <input className ="mail-search-input" id="searchMail" type="text" placeholder="Search mail..."  name='mailSearch'
- autoFocus required value={mailSearch}
+  <label htmlFor="text"></label>
+  <input className ="mail-search-input" id="searchMail" type="text" placeholder="Search mail..."  name='filterSearch' 
+  
+ autoFocus  value={filterSearch}
                 onChange={this.handleChange}
  />
 </form>
