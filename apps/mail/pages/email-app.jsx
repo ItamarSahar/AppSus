@@ -10,7 +10,6 @@ export class MailApp extends React.Component {
     mails: [],
     filterBy: null,
     folderFilter: 0,
-    isNewMail: false,
 
   };
 
@@ -70,10 +69,7 @@ export class MailApp extends React.Component {
     });
     mailService.saveMails(mails);
   }
-  composeMail = () => {
-    this.setState({ isNewMail: true }, this.loadMails);
-  };
-
+  
   onMoveToTrash = (mailId) => {
     let mails = mailService.loadMails();
  {
@@ -87,7 +83,7 @@ export class MailApp extends React.Component {
     }
   };
 
-  showUnreadCount(mails) {
+  countUnread(mails) {
     let unreadCount = 0;
     mails.map((mail) => {
       if (mail.isRead) unreadCount++;
@@ -100,7 +96,7 @@ export class MailApp extends React.Component {
    this.setState({mails})
   };
   render() {
-    const { mails, filterBy, isNewMail} = this.state;
+    const { mails} = this.state;
     return (
       <div className='mail-app'>
      
@@ -114,7 +110,7 @@ export class MailApp extends React.Component {
           
             mails={mails}
             onFolderFilter={this.onFolderFilter}
-            showUnreadCount={this.showUnreadCount}
+            showUnreadCount={this.countUnread}
           />
           <EmailList
             togglePreview={this.togglePreview}

@@ -12,9 +12,9 @@ export function MailPreview({
     <tr className={mail.isRead ? 'mail-preview' : 'mail-preview bold '}>
       <td className='star-preview' onClick={toggleStar}>
         {!mail.star ? (
-          <img src='assets/SVG/notFilledStar.svg' alt='star' />
+          <img src='assets/SVG/unfilledstar.svg' alt='star' />
         ) : (
-          <img src='assets/SVG/filledStar.svg' alt='star' />
+          <img src='assets/SVG/star.svg' alt='star' />
         )}
       </td>
       <td className='name-preview' onClick={togglePreview}>
@@ -35,13 +35,13 @@ export function MailPreview({
       <td className='preview-options'>
         {mail.isRead ? (
           <img
-            src='assets/SVG/markAsRead.svg'
+            src='assets/SVG/read.svg'
             onClick={toggleRead}
             height='22px'
           />
         ) : (
           <img
-            src='assets/SVG/markAsUnRead.svg'
+            src='assets/SVG/unread.svg'
             onClick={toggleRead}
             height='22px'
           />
@@ -59,9 +59,9 @@ export function MailPreview({
     <tr className='expand-preview'>
       <td className='star-preview' onClick={toggleStar}>
         {!mail.star ? (
-          <img src='assets/SVG/notFilledStar.svg' alt='star' />
+          <img src='assets/SVG/unfilledstar.svg' alt='star' />
         ) : (
-          <img src='assets/SVG/filledStar.svg' alt='star' />
+          <img src='assets/SVG/star.svg' alt='star' />
         )}
       </td>
       <td className='from-preview' onClick={togglePreview}>
