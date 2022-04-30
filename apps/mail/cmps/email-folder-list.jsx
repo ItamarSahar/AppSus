@@ -11,12 +11,13 @@ export function MailFolderList({
     ev.preventDefault();
     onFolderFilter(ev.target.value);
   };
+  
   return (
     <div className='mail-folder-list'>
       <ul>
         <li  className ="first-li"onClick={getFolderFilter} value='0'>
         <img className ="inbox-image"
-          src='assets/SVG/unread.svg'
+          src='../assets/svg/unread.svg'
           height='10px'
         />
         <p className ="inbox">
@@ -25,35 +26,35 @@ export function MailFolderList({
         </li>
         <li onClick={getFolderFilter} value='1'>
         <img
-          src='assets/SVG/read.svg'
+          src='../assets/svg/read.svg'
           height='10px'
         />
           Read    
         </li>
         <li onClick={getFolderFilter} value='2'>
         <img
-          src='assets/SVG/unread.svg'
+          src='../assets/svg/unread.svg'
           height='10px'
         />
           Unread        
         </li>
         <li onClick={getFolderFilter} value='3'>
         <img
-          src='assets/SVG/star.svg'
+          src='../assets/svg/star.svg'
           height='10px'
         />
           Starred    
         </li>
         <li onClick={getFolderFilter} value='4'>
         <img
-          src='assets/SVG/trash.svg'
+          src='../assets/svg/trash.svg'
           height='10px'
         />
           Trash    
         </li>
         <li onClick={getFolderFilter} value='5'>
         <img
-          src='assets/SVG/sent.svg'
+          src='../assets/svg/sent.svg'
           height='10px'
         />
           Sent    
