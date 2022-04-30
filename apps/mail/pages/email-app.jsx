@@ -26,7 +26,6 @@ export class MailApp extends React.Component {
  
   loadMails = () => {
     const { filterBy,folderFilter } = this.state;
-    console.log(`filterBy = `, filterBy)
 
     mailService.query(filterBy,folderFilter).then((mails) => {
       this.setState({ mails });
