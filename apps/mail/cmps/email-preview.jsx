@@ -8,7 +8,6 @@ export function MailPreview({
   toggleRead,
 }) {
   let date = new Date(mail.sentAt);
-  console.log(mail)
   return !mail.isOpen ? (
     <tr className={mail.isRead ? 'mail-preview' : 'mail-preview bold '}>
       <td className='star-preview' onClick={toggleStar}>

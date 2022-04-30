@@ -5,6 +5,8 @@
     flex-wrap: wrap;
     align-items: center;
     white-space: nowrap;
-    margin-top: 40px;
     margin-left: 40px;
+    margin-top: 20px;
+    border-left: .3px solid rgb(158, 152, 152);
+
 }

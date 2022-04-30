@@ -13,7 +13,7 @@ export function EmailList({  mails,
 		<div className='mail-list'>
 	
 			  <section className="email-list">
-        {mails.map(email => <div className ="email-single"><MailPreview mail={email} key={email.id} toggleStar={() => {
+        {mails.map(email => <div  key ={`${email.id}`}className ="email-single"><MailPreview mail={email} key={email.id} toggleStar={() => {
                 toggleStar(mails, email.id);
                 loadMails();
               }}

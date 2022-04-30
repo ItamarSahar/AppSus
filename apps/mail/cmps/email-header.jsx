@@ -25,11 +25,10 @@ export class MailHeader extends React.Component {
     const { mailSearch } = this.state;
     return (
       <div className='m'>
-          <div className='mail-logo'>
-            <img src='./assets/SVG/mail.svg' height = '10px' />
-          </div>
+       
           <div className='search-mail'>
-            <form onSubmit={this.getFilter} className='mail-filter'>
+            
+            {/* <form onSubmit={this.getFilter} className='search-bar'>
               <input
                 type='text'
                 id='searchMail'
@@ -39,7 +38,14 @@ export class MailHeader extends React.Component {
                 value={mailSearch}
                 onChange={this.handleChange}
               />
-            </form>
+            </form> */}
+  <form   className ="mail-search-form"role="search">
+  <label htmlFor="search">Search for stuff</label>
+  <input className ="mail-search-input" id="searchMail" type="search" placeholder="Search mail..."  name='mailSearch'
+ autoFocus required value={mailSearch}
+                onChange={this.handleChange}
+ />
+</form>
           </div>
        
         </div>

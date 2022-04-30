@@ -4,7 +4,9 @@ export function MailFolderList({
     onFolderFilter,
   }) {
     let percent = 0;
-    percent = showUnreadCount(mails);
+    if(showUnreadCount(mails)){
+      percent = Math.round(showUnreadCount(mails))
+    }
     const getFolderFilter = (ev) => {
       ev.preventDefault();
       onFolderFilter(ev.target.value);
@@ -58,10 +60,11 @@ export function MailFolderList({
           </li>
         </ul>
         <div className='meter'>
-          <span>{percent}</span>
-          <meter min='0' max='100'  low="70" high="20"value={percent}>
+          <span>            {percent}%
+</span>
+       <meter min='0' max='100'  low="70" high="20" value={percent}>
             {percent}
-          </meter>
+          </meter>  
         </div>
       </div>
     );
