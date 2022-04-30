@@ -1,5 +1,6 @@
 const { Link } = ReactRouterDOM;
 
+
 export function MailPreview({
   mail,
   togglePreview,
@@ -35,20 +36,20 @@ export function MailPreview({
       <td className='preview-options'>
         {mail.isRead ? (
           <img
-            src='./assets/svg/read.svg'
+            src='../../../assets/svg/read.svg'
             onClick={toggleRead}
             height='22px'
           />
         ) : (
           <img
-            src='./assets/svg/unread.svg'
+            src='../../../assets/svg/unread.svg'
             onClick={toggleRead}
             height='22px'
           />
         )}
         <img
           className='delete'
-          src='./assets/svg/trash.svg'
+          src='../../../assets/svg/trash.svg'
           height='20px'
           onClick={onMoveToTrash}
         />
@@ -59,9 +60,9 @@ export function MailPreview({
     <tr className='expand-preview'>
       <td className='star-preview' onClick={toggleStar}>
         {!mail.star ? (
-          <img src='./assets/svg/unfilledstar.svg' alt='star' />
+          <img src='../../../assets/svg/unfilledstar.svg' alt='star' />
         ) : (
-          <img src='./assets/svg/star.svg' alt='star' />
+          <img src='../../../assets/svg/star.svg' alt='star' />
         )}
       </td>
       <td className='from-preview' onClick={togglePreview}>
