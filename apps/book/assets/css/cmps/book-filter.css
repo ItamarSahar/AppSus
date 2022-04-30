@@ -1,0 +1,10 @@
+.book-filter {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+}
+
+input {
+	margin-inline-end: 5px;
+	margin-inline-start: 5px;
+}

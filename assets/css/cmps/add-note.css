@@ -1,0 +1,31 @@
+.fo {
+    font-family: fo;
+} 
+.add-note {
+    margin: auto;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.add-todos-btn::before {
+content: '\f03a';
+}
+.add-txt-btn::before {
+content: '\f15c';
+}
+.add-img-btn::before {
+content: '\f03e';
+}
+.add-video-btn::before {
+content: '\f167';
+}
+
+
+/* .add-note-btn {
+
+} */
+
+

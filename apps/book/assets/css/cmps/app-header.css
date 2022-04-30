@@ -1,0 +1,21 @@
+.app-header {
+	width: 100%;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-block-end: 15px;
+	background-color: #a97155;
+	font-size: 20px;
+}
+
+.nav-header {
+	display: flex;
+	width: 50%;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.active {
+	color: #8fbdd3;
+}

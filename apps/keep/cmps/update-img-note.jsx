@@ -5,10 +5,22 @@ export class UpdateImgNote extends React.Component {
 		url: '',
 		title: '',
 	}
+
+	componentDidMount() {
+		this.loadNote()
+	}
+
 	handleChange = ({ target }) => {
 		const value = target.value
 		const field = target.name
-		this.setState((prevState) => ({ ...prevState.filterBy, [field]: value }))
+		this.setState((prevState) => ({ ...prevState, [field]: value }))
+	}
+
+	loadNote = () => {
+		const { note } = this.props
+		const { title, url } = note.info
+		console.log(note)
+		this.setState({ title, url })
 	}
 
 	render() {

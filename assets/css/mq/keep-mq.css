@@ -1,0 +1,24 @@
+@media screen and (max-width: 830px) {
+    html {
+        font-size: 14px;
+    }
+	.note-list {
+		columns: 250px 2;
+        width: 100%;
+        column-gap: 24px;
+	}
+}
+@media screen and (max-width: 560px) {
+	.note-list {
+        
+		display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+	}
+    .note-preview {
+
+        margin: auto;
+        width: 80%;
+    }
+}

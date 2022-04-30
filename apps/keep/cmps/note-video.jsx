@@ -20,14 +20,29 @@ export class NoteVideo extends React.Component {
 	render() {
 		const { src } = this.state
 		const { note } = this.props
-		const {onRemoveNote} = this.props
+		const { onRemoveNote, onDuplicateNote } = this.props
 
 		return (
 			<section className="note-video">
-				<Link to={`/keep/edit/${note.type}/${note.id}`}>Update Note </Link>
-				<button onClick={() => onRemoveNote(note)}>X</button>
-				<h1>{note.type}</h1>
-				<h2>{note.info.title}</h2>
+				<section className="btn-container  ">
+					<Link to={`/keep/edit/${note.type}/${note.id}`}>
+						<button className="btn-update-note"></button>
+					</Link>
+					<button
+						onClick={() => onRemoveNote(note)}
+						className="btn-delete-note"
+					></button>
+					<button
+						onClick={() => onDuplicateNote(note)}
+						className="btn-duplicate-note"
+					>
+						duplicate
+					</button>
+				</section>
+
+				<section className="note-desc">
+					<h2 className="note-header">{note.info.title}</h2>
+				</section>
 				<div
 					className="Container"
 					dangerouslySetInnerHTML={{ __html: src }}

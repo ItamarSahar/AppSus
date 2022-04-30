@@ -18,6 +18,9 @@ export const noteService = {
 	getNotes: _getNotes,
 	onChangeTxtNote,
 	onChangeImgNote,
+	onChangeVideoNote,
+	onChangeTodosNote,
+	onDuplicateNote,
 }
 
 function query() {
@@ -58,7 +61,7 @@ function onChangeTxtNote(note, txt) {
 
 function createTodosNote(info) {
 	const { label, todos } = info
-	const newTodos = _getTodos(todos)
+	const newTodos = typeof todos === 'string' ? _getTodos(todos) : todos
 	console.log(newTodos)
 	let notes = _loadFromStorage()
 	const newTodosNote = {
@@ -72,6 +75,25 @@ function createTodosNote(info) {
 	notes.push(newTodosNote)
 	_saveToStorage(notes)
 }
+
+function onChangeTodosNote(note, label, todos) {
+	let notes = _loadFromStorage()
+	const newTodos = _getTodos(todos)
+	const newTodosNote = {
+		id: note.id,
+		type: 'todos',
+		isPinned: false,
+		info: {
+			label,
+			todos: newTodos,
+		},
+	}
+	const noteIdx = getNoteIdxById(newTodosNote.id)
+	notes.splice(noteIdx, 1, newTodosNote)
+	_saveToStorage(notes)
+	return
+}
+
 function createImgNote(url, title) {
 	let notes = _loadFromStorage()
 	const newImgNote = {
@@ -107,6 +129,19 @@ function createVideoNote(url, title) {
 	_saveToStorage(notes)
 }
 
+function onChangeVideoNote(note, url, title) {
+	let notes = _loadFromStorage()
+	const newVideoNote = {
+		id: note.id,
+		type: 'video',
+		info: { url, title },
+	}
+	const noteIdx = getNoteIdxById(newVideoNote.id)
+	notes.splice(noteIdx, 1, newVideoNote)
+	_saveToStorage(notes)
+	return
+}
+
 function deleteTodo(idx, note) {
 	let { todos } = note.info
 	let notes = _loadFromStorage()
@@ -115,23 +150,6 @@ function deleteTodo(idx, note) {
 	notes.splice(noteIdx, 1, note)
 	_saveToStorage(notes)
 	return
-}
-
-function saveNote(note) {
-	if (note.type === 'todos') {
-		console.log(note)
-		note = _getTodos(note.info.todos)
-		console.log(note)
-	}
-	if (note.id) return updateNote(note)
-	else return createNote(note)
-}
-
-function createNote(note) {
-	if (note.type === 'txt') return createTxtNote(note)
-	else if (note.type === 'img') return createImgNote(note)
-	else if (note.type === 'video') return createVideoNote(note)
-	else if (note.type === 'todos') return createTodosNote(note)
 }
 
 function updateNote(noteToUpdate) {
@@ -159,6 +177,18 @@ function updateNotes(notes) {
 function _getTodos(todos) {
 	const newTodos = todos.split(',')
 	return newTodos.map((todo) => ({ txt: todo, doneAt: null }))
+}
+
+function onDuplicateNote(noteId) {
+	const newNote = getNoteById(noteId)
+	console.log(newNote)
+	if (newNote.type === 'txt') createTxtNote(newNote.info.txt)
+	else if (newNote.type === 'todos') createTodosNote(newNote.info)
+	else if (newNote.type === 'img')
+		createImgNote(newNote.info.url, newNote.info.title)
+	else if (newNote.type === 'video')
+		createVideoNote(newNote.info.url, newNote.info.title)
+	return
 }
 
 function _getNotes() {
@@ -200,7 +230,7 @@ function _getNotes() {
 			isPinned: false,
 			info: {
 				url: 'https://www.youtube.com/watch?v=l_Zb2W18MHc&ab_channel=MontyKamal',
-				title: 'Itachi',
+				title: 'Itachi and Sasuke VS Kabuto',
 			},
 			bgColor: utilService.getRandomColor(),
 		},
