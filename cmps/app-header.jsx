@@ -20,7 +20,7 @@ class _appHeader extends React.Component {
 		let { menu, button } = this.state.display
 		return (
 			<header className="app-header">		
-						<NavLink exact to="/">
+						<NavLink className ="nav-link" exact to="/">
 				<h3 className="logo">Appsus</h3>
 		</NavLink>
 
