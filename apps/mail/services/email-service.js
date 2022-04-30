@@ -79,6 +79,18 @@ const gEmails = [
     isTrash: false,
     from: "hey@appsus.com",
   },
+  {
+    id: "e109",
+    subject: "Hey",
+    body: "This is the nigerian prince, i offer you 5 milion dollars for free sir",
+    isRead: false,
+    sentAt: 1551133930594,
+    isStarred: false,
+    isOpen: false,
+    to: "momo@momo.com",
+    isTrash: false,
+    from: "has@appsus.com",
+  },
 ];
 
 const criteria = {
@@ -144,12 +156,21 @@ function saveMails(mails) {
 function loadMails() {
   return _loadFromStorage();
 }
-function _getFilteredMails(mails, filterBy) {
+function getFiltered(mails, filterBy) {
   let mailSearch = "";
   if (filterBy) mailSearch = filterBy.mailSearch;
   if (mailSearch === "") {
     return mails;
   }
+  let filtered = mails.filter((mail) => {
+    if (mail.subject.toUpperCase().includes(mailSearch.toUpperCase())) {
+      return mail;
+    }
+    if (mail.body.toUpperCase().includes(mailSearch.toUpperCase())) {
+      return mail;
+    }
+  });
+  return filtered;
 }
 function query(filterBy, folderFilter = 0) {
   let emails = _loadFromStorage();
@@ -157,7 +178,7 @@ function query(filterBy, folderFilter = 0) {
     emails = createEmail();
     _saveToStorage(emails);
   }
-  const mails = _getFilteredMails(emails, filterBy);
+  const mails = getFiltered(emails, filterBy);
 
   if (folderFilter === 0 && !filterBy) {
     let notTrash = mails.filter((mail) => mail.isTrash === false);

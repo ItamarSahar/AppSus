@@ -25,9 +25,10 @@ export function MailPreview({
           : mail.subject}
       </td>
       <td className='text-preview' onClick={togglePreview}>
-        {mail.body.length > 100 ? mail.body.slice(0, 100) + `...` : mail.body}
+        
+        {mail.body.length > 100 ? mail.body.slice(0, 100) + '...'  : mail.body}
       </td>
-      <td onClick={togglePreview}>
+      <td className ="date-preview"onClick={togglePreview}>
         {date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()}
       </td>
       <td className='preview-options'>

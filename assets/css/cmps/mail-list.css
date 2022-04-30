@@ -1,6 +1,9 @@
 .mail-list {
     width: 100%;
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
     white-space: nowrap;
     margin-top: 40px;
     margin-left: 40px;

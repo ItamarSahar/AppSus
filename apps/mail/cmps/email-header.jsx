@@ -8,6 +8,7 @@ export class MailHeader extends React.Component {
     const field = target.name;
     const value = target.value;
     this.setState((prevState) => ({ ...prevState, [field]: value }));
+    console.log(this.state)
   };
 
   getFilter = (ev) => {

@@ -1,27 +1,44 @@
 .mail-preview {
+
     color: black;
     display: flex;
     gap: 15px;
-    text-align: left;
     cursor: pointer;
     border-bottom: 0.2px solid rgb(187, 184, 184);
 }
 
 .subject-preview {
     width: 100px;
+    text-align: left;
+
 }
 
 .text-preview {
     width: 770px;
+    margin-left: 100px;
+    text-align: left;
+    flex-basis: auto;
+    flex-shrink: 3;
+
+
 }
 
 .mail-preview td {
-    padding: 30px 10px;
+    padding: 20px 10px;
+    flex-basis: auto;
+    flex-shrink: 3;
+
+
+}
+
+.date-preview {
+    text-align: right;
 
 }
 
 .preview-options {
-    width: 400px;
+    width: 100px;
+    text-align: right;
 }
 
 .expand-preview {
