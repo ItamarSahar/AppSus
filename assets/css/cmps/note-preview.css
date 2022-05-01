@@ -1,6 +1,6 @@
 .note-preview {
 	border: 1px solid rgba(110, 110, 110, 0.514);
-
+	position: relative;
 	width: 240px;
 	word-break: break-all;
 	display: inline-block;
@@ -9,6 +9,7 @@
 	padding-bottom: 10px;
 	margin-block-end: 1.5rem;
 	box-sizing: content-box;
+
 	/* margin-inline-end: 5px; */
 }
 
@@ -22,8 +23,12 @@
 }
 
 .btn-container {
-	box-sizing: content-box;
-	display: none;
+	opacity: 0;
+	/* visibility: hidden; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
 }
 
 .note-preview:hover {
@@ -31,10 +36,8 @@
 }
 
 .note-preview:hover .btn-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 15px;
+	opacity: 1;
+	/* visibility: visible; */
 }
 .btn-delete-note::before {
 	font-family: fo;
@@ -44,4 +47,14 @@
 .btn-update-note::before {
 	font-family: fo;
 	content: '\f14b';
+}
+
+
+.btn-color {
+	position: relative;
+}
+
+
+.btn-color:hover .colors-container {
+	display: flex;
 }

@@ -1,9 +1,15 @@
 .colors-container {
-	font-size: 0.875rem;
 	display: none;
+	position: absolute;
+	z-index: 10;
+	top: 28px;
+	left: -50px;
+	font-size: 0.875rem;
 	gap: 10px;
 	padding: 10px;
 	background: var(--logo);
+	border-radius: 1rem;
+	background-color: var(--main-bg);
 }
 
 .color {
@@ -17,19 +23,20 @@
 		rgb(0 0 0 / 12%) 0px 1px 1px 0px, rgb(60 66 87 / 16%) 0px 0px 0px 1px,
 		rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
 		rgb(60 66 87 / 8%) 0px 2px 5px 0px;
-	border-radius: 4px;
-	font-size: 14px;
+	border-radius: 50%;
 	font-weight: 500;
 	padding: 4px 8px;
 	display: inline-block;
-	min-height: 28px;
 	transition: background-color 0.24s, box-shadow 0.24s;
-	width: 20px;
-	height: 20px;
+	width: 2px;
+	height: 10px;
 	border: 1px solid black;
 	cursor: pointer;
 }
 
-.note-preview:hover .colors-container {
-	display: flex;
+
+
+.btn-fill-color {
+	width: 16px;
+	height: 16px;
 }

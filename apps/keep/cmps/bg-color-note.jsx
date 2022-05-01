@@ -3,13 +3,14 @@ export function BgColorInput({ type, name, handleStyleChange }) {
 
 	return (
 		<div className="colors-container">
-			pick Bg  color
 			{colors.map((color) => (
 				<div
 					className="color"
 					key={color}
 					style={{ backgroundColor: color }}
-					onClick={() => handleStyleChange('backgroundColor', color)}
+					onClick={() => {
+						handleStyleChange('backgroundColor', color)
+					}}
 				></div>
 			))}
 		</div>

@@ -1,5 +1,6 @@
 import { NoteTodo } from './note-todo.jsx'
 import { noteService } from '../services/note.service.js'
+import { BtnColor } from './btn-color.jsx'
 const { Link } = ReactRouterDOM
 export class NoteTodos extends React.Component {
 	state = {
@@ -16,7 +17,7 @@ export class NoteTodos extends React.Component {
 		const { note } = this.props
 		const { todos } = this.props.note.info
 		const { label } = this.props.note.info
-		const { onRemoveNote ,onDuplicateNote } = this.props
+		const { onRemoveNote, onDuplicateNote,handleStyleChange } = this.props
 		return (
 			<section className="note-todos">
 				<section className="btn-container ">
@@ -27,12 +28,11 @@ export class NoteTodos extends React.Component {
 						onClick={() => onRemoveNote(note)}
 						className="btn-delete-note"
 					></button>
-							<button
-					onClick={() => onDuplicateNote(note)}
-					className="btn-duplicate-note"
-				>
-					duplicate
-				</button>
+					<button
+						onClick={() => onDuplicateNote(note)}
+						className="btn-duplicate-note fo"
+					></button>
+					<BtnColor handleStyleChange={handleStyleChange} />
 				</section>
 				<ul className="todos-list">
 					<h5 className="note-header">{label}</h5>

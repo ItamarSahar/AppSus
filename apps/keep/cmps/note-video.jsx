@@ -1,4 +1,4 @@
-import { noteService } from '../services/note.service.js'
+import { BtnColor } from './btn-color.jsx'
 const { Link } = ReactRouterDOM
 export class NoteVideo extends React.Component {
 	state = {
@@ -20,7 +20,7 @@ export class NoteVideo extends React.Component {
 	render() {
 		const { src } = this.state
 		const { note } = this.props
-		const { onRemoveNote, onDuplicateNote } = this.props
+		const { onRemoveNote, onDuplicateNote, handleStyleChange } = this.props
 
 		return (
 			<section className="note-video">
@@ -34,17 +34,16 @@ export class NoteVideo extends React.Component {
 					></button>
 					<button
 						onClick={() => onDuplicateNote(note)}
-						className="btn-duplicate-note"
-					>
-						duplicate
-					</button>
+						className="btn-duplicate-note fo"
+					></button>
+					<BtnColor handleStyleChange={handleStyleChange} />
 				</section>
 
 				<section className="note-desc">
 					<h2 className="note-header">{note.info.title}</h2>
 				</section>
 				<div
-					className="Container"
+					className="video-Container"
 					dangerouslySetInnerHTML={{ __html: src }}
 				></div>
 			</section>

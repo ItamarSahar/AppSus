@@ -1,10 +1,8 @@
 .note-list {
 	margin: auto;
-	columns: 250px 3;
+	columns: 250px auto;
 	width: 800px;
 }
-
-
 
 .add-note-btn {
 	font-size: 00.875rem;

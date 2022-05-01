@@ -22,6 +22,7 @@ export class MailApp extends React.Component {
         mailService.saveMails(mails);
       })
       .then(() => this.loadMails());
+      document.body.style.overflowY = 'hidden' 
   }
 
  

@@ -10,6 +10,7 @@ export class NoteApp extends React.Component {
 
 	componentDidMount() {
 		this.loadNotes()
+		document.body.style.overflowY = 'visible' 
 	}
 
 	loadNotes = () => {
@@ -29,6 +30,10 @@ export class NoteApp extends React.Component {
 		noteService.updateNotes(notes)
 		this.loadNotes()
 	}
+
+	// get pinedNotes() {
+
+	// }
 
 	render() {
 		const { notes } = this.state

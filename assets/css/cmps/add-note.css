@@ -1,31 +1,34 @@
 .fo {
-    font-family: fo;
-} 
+	font-family: fo;
+}
 .add-note {
-    margin: auto;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
+	margin: auto;
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1.5rem;
+	margin-block-end: 10px;
 }
 
 .add-todos-btn::before {
-content: '\f03a';
+	content: '\f03a';
 }
 .add-txt-btn::before {
-content: '\f15c';
+	content: '\f15c';
 }
 .add-img-btn::before {
-content: '\f03e';
+	content: '\f03e';
 }
 .add-video-btn::before {
-content: '\f167';
+	content: '\f167';
 }
 
+
+.btn-duplicate-note::before {
+    content: '\f0c5';
+}
 
 /* .add-note-btn {
 
 } */
-
-

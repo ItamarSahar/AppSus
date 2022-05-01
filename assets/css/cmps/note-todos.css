@@ -1,4 +1,6 @@
 .note-todos {
+	padding: 10px;
+	text-align: left;
 	display: flex;
 	flex-direction: column-reverse;
 }
@@ -13,24 +15,19 @@
 }
 
 .todos-list li {
+	text-align: left;
 	width: 100%;
-
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	justify-content: space-evenly;
+	
+	justify-content: space-between;
 }
-
 
 .todos-list li p {
 	word-break: break-all;
 }
 
-.btn-todo:after{
-    display: inline-block;
-    content: "\00d7"; /* This will render the 'X' */
-  } 
-
-
-
-
+.btn-todo:after {
+	display: inline-block;
+	content: '\00d7'; /* This will render the 'X' */
+}

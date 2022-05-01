@@ -2,7 +2,6 @@ import { NoteTxt } from '../cmps/note-txt.jsx'
 import { NoteTodos } from '../cmps/note-todos.jsx'
 import { NoteImg } from '../cmps/note-img.jsx'
 import { NoteVideo } from '../cmps/note-video.jsx'
-import { BgColorInput } from './bg-color-note.jsx'
 
 const { Link } = ReactRouterDOM
 
@@ -37,8 +36,8 @@ export class NotePreview extends React.Component {
 					note={note}
 					onRemoveNote={onRemoveNote}
 					onDuplicateNote={onDuplicateNote}
+					handleStyleChange={this.handleStyleChange}
 				/>
-				<BgColorInput handleStyleChange={this.handleStyleChange} />
 			</section>
 		)
 	}

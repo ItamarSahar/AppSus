@@ -1,6 +1,7 @@
+import { BtnColor } from './btn-color.jsx'
 const { Link } = ReactRouterDOM
 
-export function NoteImg({ note, onRemoveNote, onDuplicateNote }) {
+export function NoteImg({ note, onRemoveNote, onDuplicateNote,handleStyleChange }) {
 	return (
 		<section className="note-img ">
 			<section className="btn-container ">
@@ -11,12 +12,11 @@ export function NoteImg({ note, onRemoveNote, onDuplicateNote }) {
 					onClick={() => onRemoveNote(note)}
 					className="btn-delete-note"
 				></button>
-				<button
+							<button
 					onClick={() => onDuplicateNote(note)}
-					className="btn-duplicate-note"
-				>
-					duplicate
-				</button>
+					className="btn-duplicate-note fo"
+				></button>
+				<BtnColor handleStyleChange={handleStyleChange} />
 			</section>
 			<section className="note-desc">
 				<h2 className="note-header">{note.info.title}</h2>

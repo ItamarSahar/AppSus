@@ -197,7 +197,30 @@ function _getNotes() {
 			id: utilService.makeId(),
 			type: 'txt',
 			isPinned: false,
-			info: { txt: 'Fullstack Me Baby!' },
+			info: {
+				txt: ' “Thousands of candles can be lighted from a single candle, and the life of the candle will not be shortened. Happiness never decreases by being shared.” -Buddha',
+			},
+			bgColor: utilService.getRandomColor(),
+		},
+		{
+			id: utilService.makeId(),
+			type: 'txt',
+			isPinned: false,
+			info: { txt: 'Finish the movie from last night.' },
+			bgColor: utilService.getRandomColor(),
+		},
+		{
+			id: utilService.makeId(),
+			type: 'txt',
+			isPinned: false,
+			info: { txt: 'I can take it.The tougher it gets,the cooler I get.' },
+			bgColor: utilService.getRandomColor(),
+		},
+		{
+			id: utilService.makeId(),
+			type: 'txt',
+			isPinned: false,
+			info: { txt: 'Meeting in 17:00 at the Mall!' },
 			bgColor: utilService.getRandomColor(),
 		},
 		{
@@ -206,7 +229,30 @@ function _getNotes() {
 			isPinned: false,
 			info: {
 				url: '../../../assets/img/parrots_paradise.jpg',
-				title: 'Bobi and Me',
+				title: 'my Parrots !',
+			},
+			style: { backgroundColor: '#00d' },
+			bgColor: utilService.getRandomColor(),
+		},
+
+		{
+			id: utilService.makeId(),
+			type: 'img',
+			isPinned: false,
+			info: {
+				url: '../../../assets/img/Dubai.jpeg',
+				title: 'Dubai Sky View !',
+			},
+			style: { backgroundColor: '#00d' },
+			bgColor: utilService.getRandomColor(),
+		},
+		{
+			id: utilService.makeId(),
+			type: 'img',
+			isPinned: false,
+			info: {
+				url: '../../../assets/img/Ramat-Hagolan.jpeg',
+				title: 'My last trip to Ramat-Hagolan !',
 			},
 			style: { backgroundColor: '#00d' },
 			bgColor: utilService.getRandomColor(),
@@ -216,10 +262,36 @@ function _getNotes() {
 			type: 'todos',
 			isPinned: false,
 			info: {
-				label: 'Get my stuff together',
+				label: 'Get the kids!',
 				todos: [
-					{ txt: 'Driving liscence', doneAt: null },
-					{ txt: 'Coding power', doneAt: 187111111 },
+					{ txt: 'Bring Dana from school', doneAt: null },
+					{ txt: 'Take James to Karate ', doneAt: 187111111 },
+				],
+			},
+			bgColor: utilService.getRandomColor(),
+		},
+		{
+			id: utilService.makeId(),
+			type: 'txt',
+			isPinned: false,
+			info: {
+				txt: '“Life is really simple, but we insist on making it complicated.” -Confucius',
+			},
+			bgColor: utilService.getRandomColor(),
+		},
+		{
+			id: utilService.makeId(),
+			type: 'todos',
+			isPinned: false,
+			info: {
+				label: 'Shopping list',
+				todos: [
+					{ txt: 'Milk', doneAt: null },
+					{ txt: 'Bread', doneAt: null },
+					{ txt: 'Meat', doneAt: null },
+					{ txt: 'Eggs', doneAt: null },
+					{ txt: 'Chocolate', doneAt: null },
+					{ txt: 'Salt', doneAt: 187111111 },
 				],
 			},
 			bgColor: utilService.getRandomColor(),
