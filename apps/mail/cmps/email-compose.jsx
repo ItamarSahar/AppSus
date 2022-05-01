@@ -50,12 +50,10 @@ export class ComposeMail extends React.Component {
           
         const {to, subject, body } = this.state.mail;
         const {button,compose} = this.state.display;
-         console.log(this.state)
-         console.log(this.state.mail)
       return(
-          <div>
+          <div className ="compose-div">
                     <button onClick = {this.openCompose} className ={`compose-button button-17 ${button}`}>          <img
-            src='assets/SVG/Plus_symbol.svg'
+            src='assets/svg/plus.svg'
             height='40px'
           /> <div className ="compose-text">Compose</div>
 </button>

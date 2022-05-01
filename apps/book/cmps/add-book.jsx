@@ -28,7 +28,7 @@ export class AddBook extends React.Component {
 		const {book} = this.state
 		return (
 			<section className="AddBook">
-				<h1>hey Add book!</h1>
+				<h1>Add a book of your choice!</h1>
 				<form>
 					<label>
 						{' '}

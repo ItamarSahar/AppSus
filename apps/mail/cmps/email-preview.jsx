@@ -1,5 +1,6 @@
 const { Link } = ReactRouterDOM;
 
+
 export function MailPreview({
   mail,
   togglePreview,
@@ -12,12 +13,14 @@ export function MailPreview({
     <tr className={mail.isRead ? 'mail-preview' : 'mail-preview bold '}>
       <td className='star-preview' onClick={toggleStar}>
         {!mail.star ? (
-          <img src='assets/SVG/notFilledStar.svg' alt='star' />
+          <img src='assets/svg/unfilledstar.svg' alt='star' />
         ) : (
-          <img src='assets/SVG/filledStar.svg' alt='star' />
+          <img src='assets/svg/star.svg' alt='star' />
         )}
       </td>
-
+      <td className='name-preview' onClick={togglePreview}>
+        {mail.name}
+      </td>
       <td className='subject-preview' onClick={togglePreview}>
         {mail.subject.length > 20
           ? mail.subject.slice(0, 20) + `...`
@@ -33,20 +36,20 @@ export function MailPreview({
       <td className='preview-options'>
         {mail.isRead ? (
           <img
-            src='assets/SVG/markAsRead.svg'
+            src='assets/svg/read.svg'
             onClick={toggleRead}
             height='22px'
           />
         ) : (
           <img
-            src='assets/SVG/markAsUnRead.svg'
+            src='assets/svg/unread.svg'
             onClick={toggleRead}
             height='22px'
           />
         )}
         <img
           className='delete'
-          src='assets/SVG/trash.svg'
+          src='assets/svg/trash.svg'
           height='20px'
           onClick={onMoveToTrash}
         />
@@ -57,19 +60,19 @@ export function MailPreview({
     <tr className='expand-preview'>
       <td className='star-preview' onClick={toggleStar}>
         {!mail.star ? (
-          <img src='assets/SVG/notFilledStar.svg' alt='star' />
+          <img src='assets/svg/unfilledstar.svg' alt='star' />
         ) : (
-          <img src='assets/SVG/filledStar.svg' alt='star' />
+          <img src='assets/svg/star.svg' alt='star' />
         )}
       </td>
       <td className='from-preview' onClick={togglePreview}>
-        {mail.from}
+       From {mail.from}
       </td>
       <td className='expand-preview-cell' onClick={togglePreview}>
         <div className='expand-preview-cell-content'>
           <div onClick={togglePreview} className='from-preview-open flex'>
             <h3>
-             {mail.to}
+            {mail.subject}
             </h3>
           </div>
           <div onClick={togglePreview} className='text-preview-open'>

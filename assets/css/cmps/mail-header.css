@@ -8,48 +8,42 @@
 }
 
 .mail-header {
-    position: relative;
-    bottom: 55px;
-    left: -60px;
     -webkit-box-shadow: 1px 0px 10px -10px #000000;
     box-shadow: 1px 0px 10px -10px #000000;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: #F1F3F4;
+    border: none;
+    height: 50px;
 }
 
-.search-mail {
-    -webkit-box-shadow: 1px 0px 10px -10px #000000;
-    box-shadow: 1px 0px 10px -10px #000000
-}
 
 .mail-search-form {
-    position: absolute;
-    width: 20rem;
+    width: 100%;
+    background-color: transparent;
+    text-decoration: none;
 }
 
 .mail-search-input {
     font-family: var(--font-fam);
     border: 0;
-    color: var(--color-dark);
     font-size: 1.4rem;
+    background-color: transparent;
+    outline: transparent;
+    text-decoration: none;
+
+
 }
 
 .mail-search-input {
-
     outline: 0;
-    width: 100%;
-    background: var(--color-light);
     padding: 0 1.6rem;
     appearance: none;
-    z-index: 1;
-    position: absolute;
 }
 
 
-input:not(:placeholder-shown) {
-    border-radius: var(--rad) 0 0 var(--rad);
-    width: calc(100% - var(--btn-width));
 
-
-}
 
 label {
     position: absolute;

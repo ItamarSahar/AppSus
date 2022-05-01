@@ -1,48 +1,40 @@
 
 export class MailHeader extends React.Component {
   state = {
-    mailSearch: '',
+    filterSearch: '',
   };
 
   handleChange = ({ target }) => {
     const field = target.name;
     const value = target.value;
     this.setState((prevState) => ({ ...prevState, [field]: value }));
-    console.log(this.state)
+    this.props.onSetFilter(this.state)
   };
 
-  getFilter = (ev) => {
+  onFilter = (ev) => {
     ev.preventDefault();
     this.props.onSetFilter(this.state);
-    this.resetForm();
+    this.clear();
   };
-
-  resetForm = () => {
-    this.setState({ mailSearch: '' });
-  };
+  clear = () => {
+    let {filterSearch} = this.state
+    filterSearch = ''
+    this.setState({filterSearch})
+  }
 
   render() {
-    const { mailSearch } = this.state;
+    const { filterSearch } = this.state;
     return (
       <div className='m'>
        
           <div className='search-mail'>
             
-            {/* <form onSubmit={this.getFilter} className='search-bar'>
-              <input
-                type='text'
-                id='searchMail'
-                name='mailSearch'
-                className='searchMail'
-                placeholder='Search Mail'
-                value={mailSearch}
-                onChange={this.handleChange}
-              />
-            </form> */}
-  <form   className ="mail-search-form"role="search">
-  <label htmlFor="search">Search for stuff</label>
-  <input className ="mail-search-input" id="searchMail" type="search" placeholder="Search mail..."  name='mailSearch'
- autoFocus required value={mailSearch}
+        
+  <form onSubmit={this.onFilter} className ="mail-search-form"role="search">
+  <label htmlFor="text"></label>
+  <input className ="mail-search-input" id="searchMail" type="text" placeholder="Search mail..."  name='filterSearch' 
+  
+ autoFocus  value={filterSearch}
                 onChange={this.handleChange}
  />
 </form>

@@ -10,19 +10,19 @@ export const mailService = {
   saveMails,
   loadMails,
 };
-
 const KEY = "emailDB";
 
 const loggedinUser = {
   email: "user@appsus.com",
   fullname: "Mahatma Appsus",
+  name: "Mahatma Appsus",
 };
 
 const gEmails = [
   {
     id: "e101",
-    subject: "Miss you!",
-    body: "Would love to catch up sometimes",
+    subject: "I dont Miss you!",
+    body: "Would not love to catch up sometimes",
     isRead: false,
     sentAt: 1551133930594,
     isStarred: false,
@@ -30,6 +30,7 @@ const gEmails = [
     to: "momo@momo.com",
     isTrash: false,
     from: "asd@appsus.com",
+    name: "Mahatma Appsus",
   },
   {
     id: "e102",
@@ -42,10 +43,11 @@ const gEmails = [
     to: "momo@momo.com",
     isTrash: false,
     from: "they@appsus.com",
+    name: "Donald Trump",
   },
   {
     id: "e103",
-    subject: "Hey",
+    subject: "Free Items",
     body: "This is the nigerian prince, i offer you 5 milion dollars for free sir",
     isRead: false,
     sentAt: 1551133930594,
@@ -54,6 +56,7 @@ const gEmails = [
     to: "momo@momo.com",
     isTrash: false,
     from: "has@appsus.com",
+    name: "Elon Musk",
   },
   {
     id: "e104",
@@ -66,6 +69,7 @@ const gEmails = [
     to: "momo@momo.com",
     isTrash: false,
     from: "hey@appsus.com",
+    name: "Gandhi",
   },
   {
     id: "e105",
@@ -78,6 +82,7 @@ const gEmails = [
     to: "muki@bendavid.com",
     isTrash: false,
     from: "hey@appsus.com",
+    name: "Amit Misken",
   },
   {
     id: "e109",
@@ -90,21 +95,42 @@ const gEmails = [
     to: "momo@momo.com",
     isTrash: false,
     from: "has@appsus.com",
+    name: "Avi Ron",
+  },
+  {
+    id: "e149",
+    subject: "Free Jeweels",
+    body: "This is the nigerian prince, i offer you 5 milion dollars for free sir",
+    isRead: false,
+    sentAt: 1551133930594,
+    isStarred: false,
+    isOpen: false,
+    to: "momo@momo.com",
+    isTrash: false,
+    from: "has@appsus.com",
+    name: "Mimi Cohen",
+  },
+  {
+    id: "e159",
+    subject: "You won a green card!",
+    body: "This is the nigerian prince, i offer you 5 milion dollars for free sir",
+    isRead: false,
+    sentAt: 1551133930594,
+    isStarred: false,
+    isOpen: false,
+    to: "momo@momo.com",
+    isTrash: false,
+    from: "has@appsus.com",
+    name: "Rami Levi",
   },
 ];
 
-const criteria = {
-  status: "inbox/sent/trash/draft",
-  txt: "puki", // no need to support complex text search
-  isRead: true, // (optional property, if missing: show all)
-  isStared: true, // (optional property, if missing: show all)
-  lables: ["important", "romantic"], // has any of the labels
-};
 _saveToStorage(gEmails);
 
 function createEmail(subject, body, to) {
   let emails = _loadFromStorage();
   const email = {
+    name: `${loggedinUser.name}`,
     id: utilService.makeId(),
     subject,
     body,
@@ -116,7 +142,7 @@ function createEmail(subject, body, to) {
     isTrash: false,
     from: loggedinUser.email,
   };
-  emails.push(email);
+  emails.unshift(email);
   _saveToStorage(emails);
   console.log(email);
   return Promise.resolve();
@@ -156,30 +182,20 @@ function saveMails(mails) {
 function loadMails() {
   return _loadFromStorage();
 }
-function getFiltered(mails, filterBy) {
-  let mailSearch = "";
-  if (filterBy) mailSearch = filterBy.mailSearch;
-  if (mailSearch === "") {
-    return mails;
+function query(filterBy = "", folderFilter = 0) {
+  let mails = _loadFromStorage();
+  if (!mails) {
+    mails = createEmail();
+    _saveToStorage(mails);
   }
-  let filtered = mails.filter((mail) => {
-    if (mail.subject.toUpperCase().includes(mailSearch.toUpperCase())) {
-      return mail;
-    }
-    if (mail.body.toUpperCase().includes(mailSearch.toUpperCase())) {
-      return mail;
-    }
-  });
-  return filtered;
-}
-function query(filterBy, folderFilter = 0) {
-  let emails = _loadFromStorage();
-  if (!emails) {
-    emails = createEmail();
-    _saveToStorage(emails);
-  }
-  const mails = getFiltered(emails, filterBy);
+  if (filterBy) {
+    mails = mails.filter((mail) => {
+      if (mail.subject.includes(filterBy.filterSearch)) return mail;
+      if (mail.body.includes(filterBy.filterSearch)) return mail;
+    });
 
+    return Promise.resolve(mails);
+  }
   if (folderFilter === 0 && !filterBy) {
     let notTrash = mails.filter((mail) => mail.isTrash === false);
     return Promise.resolve(notTrash);
