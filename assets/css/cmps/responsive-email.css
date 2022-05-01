@@ -421,7 +421,6 @@
 
     .mail-folder-list li:hover {
         border-top-right-radius: 50px 20px;
-        background-color: rgb(208, 197, 197);
         color: rgb(0, 0, 0);
         font-weight: 900;
         cursor: pointer;

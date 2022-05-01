@@ -10,7 +10,6 @@ export const mailService = {
   saveMails,
   loadMails,
 };
-
 const KEY = "emailDB";
 
 const loggedinUser = {
@@ -131,7 +130,7 @@ _saveToStorage(gEmails);
 function createEmail(subject, body, to) {
   let emails = _loadFromStorage();
   const email = {
-    name: "Mahatma Appsus",
+    name: `${loggedinUser.name}`,
     id: utilService.makeId(),
     subject,
     body,
@@ -143,7 +142,7 @@ function createEmail(subject, body, to) {
     isTrash: false,
     from: loggedinUser.email,
   };
-  emails.push(email);
+  emails.unshift(email);
   _saveToStorage(emails);
   console.log(email);
   return Promise.resolve();
