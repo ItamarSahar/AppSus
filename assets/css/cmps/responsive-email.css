@@ -472,4 +472,8 @@
         align-items: center;
         justify-content: center;
     }
+
+    .app-footer {
+        display: none;
+    }
 }
