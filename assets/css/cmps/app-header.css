@@ -21,7 +21,7 @@
 	overflow: hidden;
 	position: absolute;
 	transition: 100ms;
-	right: 8px;
+	right: 0px;
 	top: 50px;
 	z-index: 1;
 
@@ -82,4 +82,5 @@
 		font-size: 1rem;
 		padding: 1rem 1.5rem;
 	}
+
 }

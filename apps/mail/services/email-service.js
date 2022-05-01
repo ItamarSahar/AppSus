@@ -22,8 +22,8 @@ const loggedinUser = {
 const gEmails = [
   {
     id: "e101",
-    subject: "Miss you!",
-    body: "Would love to catch up sometimes",
+    subject: "I dont Miss you!",
+    body: "Would not love to catch up sometimes",
     isRead: false,
     sentAt: 1551133930594,
     isStarred: false,
@@ -48,7 +48,7 @@ const gEmails = [
   },
   {
     id: "e103",
-    subject: "Hey",
+    subject: "Free Items",
     body: "This is the nigerian prince, i offer you 5 milion dollars for free sir",
     isRead: false,
     sentAt: 1551133930594,
@@ -100,7 +100,7 @@ const gEmails = [
   },
   {
     id: "e149",
-    subject: "Hey",
+    subject: "Free Jeweels",
     body: "This is the nigerian prince, i offer you 5 milion dollars for free sir",
     isRead: false,
     sentAt: 1551133930594,
@@ -113,7 +113,7 @@ const gEmails = [
   },
   {
     id: "e159",
-    subject: "Hey",
+    subject: "You won a green card!",
     body: "This is the nigerian prince, i offer you 5 milion dollars for free sir",
     isRead: false,
     sentAt: 1551133930594,
@@ -183,7 +183,7 @@ function saveMails(mails) {
 function loadMails() {
   return _loadFromStorage();
 }
-function query(filterBy, folderFilter = 0) {
+function query(filterBy = "", folderFilter = 0) {
   let mails = _loadFromStorage();
   if (!mails) {
     mails = createEmail();

@@ -20,9 +20,7 @@ export function MailFolderList({
           src='assets/svg/unread.svg'
           height='10px'
         />
-        <p className ="inbox">
           Inbox        
-          </p>
         </li>
         <li onClick={getFolderFilter} value='1'>
         <img
