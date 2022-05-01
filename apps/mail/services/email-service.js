@@ -182,20 +182,13 @@ function saveMails(mails) {
 function loadMails() {
   return _loadFromStorage();
 }
-function query(filterBy = "", folderFilter = 0) {
+function query(filterBy, folderFilter = 0) {
   let mails = _loadFromStorage();
   if (!mails) {
     mails = createEmail();
     _saveToStorage(mails);
   }
-  if (filterBy) {
-    mails = mails.filter((mail) => {
-      if (mail.subject.includes(filterBy.filterSearch)) return mail;
-      if (mail.body.includes(filterBy.filterSearch)) return mail;
-    });
 
-    return Promise.resolve(mails);
-  }
   if (folderFilter === 0 && !filterBy) {
     let notTrash = mails.filter((mail) => mail.isTrash === false);
     return Promise.resolve(notTrash);
@@ -230,5 +223,17 @@ function query(filterBy = "", folderFilter = 0) {
       }
       break;
       return Promise.resolve(mails);
+  }
+  if (filterBy) {
+    mails = mails.filter(
+      (mail) =>
+        mail.body.toLowerCase().includes(filterBy.filterSearch.toLowerCase()) ||
+        mail.subject.toLowerCase().includes(filterBy.filterSearch.toLowerCase())
+    );
+    return Promise.resolve(mails);
+  }
+
+  if (!filterBy) {
+    return Promise.resolve(mails);
   }
 }

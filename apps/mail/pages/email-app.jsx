@@ -17,7 +17,6 @@ export class MailApp extends React.Component {
     this.loadMails()
       .then(() => {
         let { mails } = this.state;
-        mails.map((mail) => (mail.isOpen = false));
         mailService.saveMails(mails);
       })
       .then(() => this.loadMails());
